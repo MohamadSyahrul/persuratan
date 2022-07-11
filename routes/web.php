@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManagemenanggotaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/index', function () {
+
+Route::get('/dashboard', function () {
     return view('index');
-});
+})->middleware(['auth'])->name('dashboard');
+
+Route::resource('/managemen-anggota', ManagemenanggotaController::class)->middleware(['auth']);
+
+require __DIR__.'/auth.php';
