@@ -14,7 +14,9 @@ class KlasifikasiController extends Controller
      */
     public function index()
     {
-        //
+        $klasifikasi = Klasifikasi::all();
+        
+        return view('pages.admin.klasifikasi.index', compact('klasifikasi'));
     }
 
     /**
@@ -24,7 +26,7 @@ class KlasifikasiController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.klasifikasi.tambah');
     }
 
     /**
@@ -35,7 +37,10 @@ class KlasifikasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $klasifikasi = $request->all();
+        dd($klasifikasi);
+        Klasifikasi::create($klasifikasi);
+        return redirect()->route('klasifikasi-surat.index');
     }
 
     /**

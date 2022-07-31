@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         User::create([
             'nik' => '32323232',
             'nama' => 'Holifah',
+            'username' => 'admin',
             'email' => 'holifahaja@gmail.com',
             'password' => Hash::make('12345678'),
             'level' => 'admin'
@@ -27,7 +28,8 @@ class UserSeeder extends Seeder
         User::create([
             'nik' => '433282',
             'nama' => 'user',
-            'email' => 'iser@gmail.com',
+            'username' => 'user',
+            'email' => 'user@gmail.com',
             'password' => Hash::make('12345678'),
             'level' => 'user'
         ]);

@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ManagemenanggotaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\ManagemenanggotaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -23,5 +24,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('/managemen-anggota', ManagemenanggotaController::class)->middleware(['auth']);
+Route::resource('/klasifikasi-surat', KlasifikasiController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';

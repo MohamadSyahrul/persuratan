@@ -62,11 +62,42 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-file-text-fill"></i>
+                    <span>Arsip Surat</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a href="#">Arsip Masuk</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="#">Arsip Keluar</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item {{ Request::is('klasifikasi-surat') ? 'active' : '' }}">
+                <a href="{{route('klasifikasi-surat.index')}}" class='sidebar-link'>
+                    <i class="bi bi-layers-fill"></i>
+                    <span>Klasifikasi Surat</span>
+                </a>
+            </li>
             <li class="sidebar-item {{ Request::is('managemen-anggota') ? 'active' : '' }}">
                 <a href="{{route('managemen-anggota.index')}}" class='sidebar-link'>
                     <i class="bi bi-person-badge-fill"></i>
                     <span>Managemen Anggota</span>
                 </a>
+            </li>
+            <li class="sidebar-item">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('logout') }}" class='sidebar-link' 
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                        <i class="bi bi-door-open-fill"></i>
+                        <span>Logout</span>
+                    </a>
+                </form>
             </li>
         </ul>
     </div>
