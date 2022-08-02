@@ -26,7 +26,7 @@ class KlasifikasiController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.klasifikasi.tambah');
+        //
     }
 
     /**
@@ -38,9 +38,9 @@ class KlasifikasiController extends Controller
     public function store(Request $request)
     {
         $klasifikasi = $request->all();
-        dd($klasifikasi);
+        // dd($klasifikasi);
         Klasifikasi::create($klasifikasi);
-        return redirect()->route('klasifikasi-surat.index');
+        return redirect()->route('klasifikasi.index')->with('success', 'Data berhasil disimpan !!');
     }
 
     /**
@@ -72,9 +72,12 @@ class KlasifikasiController extends Controller
      * @param  \App\Models\Klasifikasi  $klasifikasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Klasifikasi $klasifikasi)
+    public function update(Request $request, $id)
     {
-        //
+        $klasifikasi = $request->all();
+        $item = Klasifikasi::findOrFail($id);
+        $item->update($klasifikasi);
+        return redirect()->route('klasifikasi.index')->with('success', 'Data berhasil diperbarui !!');
     }
 
     /**
@@ -83,8 +86,11 @@ class KlasifikasiController extends Controller
      * @param  \App\Models\Klasifikasi  $klasifikasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Klasifikasi $klasifikasi)
+    public function destroy($id)
     {
-        //
+        $klasifikasi = Klasifikasi::findOrFail($id);
+        $klasifikasi->delete();
+        return redirect()->route('klasifikasi.index')->with('error', 'Data berhasil dihapus !!');
+
     }
 }

@@ -76,8 +76,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item {{ Request::is('klasifikasi-surat') ? 'active' : '' }}">
-                <a href="{{route('klasifikasi-surat.index')}}" class='sidebar-link'>
+            <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
+                <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
                     <i class="bi bi-layers-fill"></i>
                     <span>Klasifikasi Surat</span>
                 </a>
