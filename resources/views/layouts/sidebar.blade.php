@@ -48,6 +48,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="sidebar-item {{ Request::is('surat-baru') ? 'active' : '' }}">
+                <a href="{{url('surat-baru')}}" class='sidebar-link'>
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Surat Baru</span>
+                </a>
+            </li>
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-collection-fill"></i>
@@ -65,14 +71,14 @@
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-file-text-fill"></i>
-                    <span>Arsip Surat</span>
+                    <span>Menyetujui Surat</span>
                 </a>
                 <ul class="submenu ">
                     <li class="submenu-item ">
-                        <a href="#">Arsip Masuk</a>
+                        <a href="#">Surat Masuk</a>
                     </li>
                     <li class="submenu-item ">
-                        <a href="#">Arsip Keluar</a>
+                        <a href="#">Surat Keluar</a>
                     </li>
                 </ul>
             </li>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ManagemenanggotaController;
+use App\Http\Controllers\SuratController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,10 @@ Route::get('/dashboard', function () {
 
 Route::resource('/managemen-anggota', ManagemenanggotaController::class)->middleware(['auth']);
 Route::resource('/klasifikasi', KlasifikasiController::class)->middleware(['auth']);
+
+Route::get('/surat-baru', [SuratController::class, 'index'])->middleware(['auth']);
+Route::post('/surat-baru', [SuratController::class, 'index'])->middleware(['auth']);
+Route::get('/surat-baru/create', [SuratController::class, 'suratBaru'])->name('suratbaru');
+Route::post('/surat-baru/create', [SuratController::class, 'createSurat'])->middleware(['auth']);
 
 require __DIR__.'/auth.php';

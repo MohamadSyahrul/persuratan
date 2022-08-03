@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class SuratKeluar extends Model
 {
     use HasFactory;
+    protected $table = 'surat_keluars';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+
+    public function validator() {
+        return $this->belongsTo(User::class, 'id_validator');
+    }
+
+    public function ttd() {
+        return $this->belongsTo(User::class, 'id_ttd');
+    }
 }
