@@ -25,7 +25,6 @@ class SuratController extends Controller
 
             $nomor = GenerateNomorSurat($param);
             $validator = User::select('nama')->find($request->id_validator);
-            // $ttd = User::select('nama')->find($request->id_ttd);
 
             $pengajuan = [
                 'nomor_surat' => $nomor['nomor_surat'],
