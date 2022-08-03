@@ -82,6 +82,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-item ">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                    <span>Disposisi</span>
+                </a>
+            </li>
             <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
                 <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
                     <i class="bi bi-layers-fill"></i>
