@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->enum('level', ['user', 'admin'])->default('user');
+            $table->enum('level', ['user','pimpinan','admin','tu','kepalabiro'])->default('user');
             $table->string('ttd')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();

@@ -24,6 +24,10 @@ Route::get('/dashboard', function () {
     return view('index');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/create-surat', function(){
+    return view('pages.surat.suratbaru.createsurat');
+})->middleware(['auth']);
+
 Route::resource('/managemen-anggota', ManagemenanggotaController::class)->middleware(['auth']);
 Route::resource('/klasifikasi', KlasifikasiController::class)->middleware(['auth']);
 
