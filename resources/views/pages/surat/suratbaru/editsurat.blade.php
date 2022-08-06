@@ -25,31 +25,32 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Buat Surat Baru</h4>
+                        <h4 class="card-title">Edit Surat Baru</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                                <form action="{{ route('createBaru') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('updateSurat', $row->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    @method('put')
                                     <div class="row">
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="no_surat-label">Nomor Surat</label>
-                                                <input type="text" id="no_surat-label" class="form-control" disabled
+                                                <input type="text" id="no_surat-label" class="form-control" disabled value="{{$row->no_surat}}"
                                                     placeholder="Nomor Surat di Generate Otomatis" name="no_surat">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="perihal-label">Perihal</label>
-                                                <input type="text" id="perihal-label" class="form-control"
+                                                <input type="text" id="perihal-label" class="form-control" value="{{$row->perihal}}"
                                                     placeholder="Masukan Perihal dari Surat" name="perihal">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="masukan-sifat">Sifat Surat</label>
-                                                <input type="text" id="company-column" class="form-control"
+                                                <input type="text" id="company-column" class="form-control" value="{{$row->sifat}}"
                                                     name="sifat" placeholder="Masukan sifat surat">
                                             </div>
                                         </div>
@@ -67,14 +68,14 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="date-surat">Tanggal Surat</label>
-                                                <input type="date" id="date-surat" class="form-control"
+                                                <input type="date" id="date-surat" class="form-control" value="{{$row->tgl_surat}}"
                                                     name="tgl_surat">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="dokumen">Dokumen</label>
-                                                <input type="file" id="dokumen" class="form-control"
+                                                <input type="file" id="dokumen" class="form-control" value="{{$row->dokumen}}"
                                                     name="dokumen" placeholder="file" required>
                                             </div>
                                         </div>

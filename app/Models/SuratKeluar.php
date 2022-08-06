@@ -12,8 +12,9 @@ class SuratKeluar extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function validator() {
-        return $this->belongsTo(User::class, 'id_validator');
+
+    public function user() {
+        return $this->belongsTo(User::class, 'id_penerima');
     }
 
     public function ttd() {

@@ -5,71 +5,114 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Klasifikasi;
 use App\Models\SuratKeluar;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SuratController extends Controller
 {
-    public function index(Request $request){
-        if($request->isMethod('get')) {
-            $klasifikasi = Klasifikasi::orderBy('nama_klasifikasi', 'asc')->get();
-            $user = User::select('id', 'nama', 'ttd')->where('level', 'user')->get();
-            return view('pages.surat.suratbaru.generatenomor', compact(['klasifikasi', 'user']));
-        } else {    
-            $klasifikasi = Klasifikasi::find($request->id_klasifikasi);
+    public function index(){
+        $user = User::all();
+        return view('pages.surat.suratbaru.createsurat', compact('user'));
+    }
 
-            $param = [
-                'kode' => $klasifikasi->kode,
-                'tgl_surat_fisik' => $request->tgl_surat_fisik,
-            ];
+    public function createBaru(Request $request)
+    {
+            $surat = $request->all();
+            $surat['no_surat'] = GenerateNomorSurat($request->tgl_surat, $request->sifat, $request->perihal);
+            $surat['id_pembuat'] = Auth::user()->id;
+            if ($request->hasFile('dokumen')) {
+                $nama = $request->dokumen;
+                $namaFile = time() . rand(100, 999) . "." . $nama->getClientOriginalExtension();
+                $surat['dokumen'] = $namaFile;
+                $nama->move(public_path() . '/dokumen', $namaFile);
+            }else{
+                $surat['dokumen'] = 'default.pdf';
+            }
+            
+            SuratKeluar::create($surat);
+            return redirect()->route('suratKeluar')->with('success', 'Surat berhasil dibuat !');
+    }
 
-            $nomor = GenerateNomorSurat($param);
-            $validator = User::select('nama')->find($request->id_validator);
+    public function suratKeluar()
+    {
+            $pagename = "Surat Keluar";
+            $SuratKeluar = SuratKeluar::with('user')->get();
+            return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename'));
+    }
 
-            $pengajuan = [
-                'nomor_surat' => $nomor['nomor_surat'],
-                'tgl_surat_fisik' => $request->tgl_surat_fisik,
-                'kode_klasifikasi' => $klasifikasi->kode,
-                'nama_klasifikasi' => $klasifikasi->nama,
-                'id_pembuat' => Auth::user()->id,
-                'id_validator' => $request->id_validator,
-                'nama_validator' => $validator->nama,
-            ];
+    public function editSurat($id){
+        $row = SuratKeluar::findorfail($id);
+        $user = User::all();
+        
+        return view('pages.surat.suratbaru.editsurat',[
+            'row'=> $row,
+            'user'=>$user
+        ]);
+    }
 
-            return redirect()->route('suratbaru', ['pengajuan' => $pengajuan]);
+    public function updateSurat(Request $request, $id){
+        $surat = SuratKeluar::findOrFail($id);
+        $row = $request->all();
+        $row['no_surat'] = GenerateNomorSurat($request->tgl_surat, $request->sifat, $request->perihal);
+        $row['id_pembuat'] = Auth::user()->id;
+            if ($request->hasFile('dokumen')) {
+                $nm = $request->dokumen;
+                $namaFile = time() . rand(100, 999) . "." . $nm->getClientOriginalExtension();
+                $request->dokumen = $namaFile;
+                $nm->move(public_path() . '/dokumen', $namaFile);
+            }else{
+                $request->dokumen = 'default.pdf';
+            }
+
+        $surat->update($row);
+        return redirect()->route('suratKeluar')->with('success', 'Surat berhasil diubah !');
+    }
+    public function deleteSurat($id){
+        $delete = SuratKeluar::findOrFail($id);
+
+        $file = public_path('/dokumen/').$delete->gambar;
+            //cek jika ada gambar
+        if (file_exists($file)){
+            //maka delete file diforder public/img
+            @unlink($file);
+        }
+        //delete data didatabase
+        $delete->delete();
+        return back();
+    }
+
+    public function detailSurat($id){
+        $pagename = "Detail Surat";
+        $detail = SuratKeluar::with('user')->where('id', $id)->get();
+        
+        return view('pages.surat.suratbaru.detailsurat',[
+            'pagename'=> $pagename,
+            'detail'=> $detail
+        ]);
+    }
+
+    public function downloadDokumen($dokumen){
+        // $namaFile = SuratKeluar::where('dokumen', $dokumen)->pluck('dokumen')->first();
+        $name = $dokumen;
+        $file = public_path("dokumen/". $dokumen);
+        // dd($file);
+
+        $headers = ['Content-Type: application/pdf'];
+    
+        if (file_exists($file)) {
+            return \Response::download($file, $name, $headers);
+        } else {
+            return redirect()->route('suratKeluar')->with('success', 'Dokumen Tidak Ada !');
         }
     }
 
-    public function suratBaru(Request $request)
+    // surat untuk pimpinan
+    public function suratMasukPimpinan()
     {
-            $pengajuan = $request->pengajuan;
-            return view('pages.surat.suratbaru.createsurat', compact('pengajuan'));
-    }
-    public function buatSurat(Request $request)
-    {
-            $req = $request->except(['pengajuan']);
-
-            $param = [
-                'kode' => $request->kode_klasifikasi,
-                'tgl_surat_fisik' => $request->tgl_surat_fisik,
-            ];
-                
-            $nomor = GenerateNomorSurat($param);
-            $req['nomor_surat'] = $nomor['nomor_surat'];
-            $req['urutan'] = $nomor['urutan'];
-
-            $param['perihal'] = $request->perihal;
-            $param['tujuan'] = $request->tujuan_surat;
-            $param['email_tujuan'] = $request->email_tujuan;
-            $param['ukuran_ttd'] = $request->ukuran_ttd;
-            $param['nomor_surat'] = $nomor['nomor_surat'];
-            $param['konten'] = $request->layout_konten;
-
-            $req['layout_konten_draft'] = $request->layout_konten;
-            $req['layout_konten'] = variabelReplace($param);
-
-            SuratKeluar::create($req);
-
-            return redirect('/surat-keluar')->with('status', 'Surat berhasil dibuat!');
+            $pagename = "Surat Masuk";
+            $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)->get();
+            return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename'));
     }
 }

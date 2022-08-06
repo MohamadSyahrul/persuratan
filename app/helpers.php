@@ -113,42 +113,22 @@ function tglIndo($tgl){
     return $hari.', '.$tanggal.' '.$bulan.' '.$tahun;		 
 }
 
-function GenerateNomorSurat($param) {
-    $max = SuratKeluar::where('kode_klasifikasi', $param['kode'])->max('urutan');
-    $kode = Str::upper($param['kode']);
-    $bulan = Carbon::parse($param['tgl_surat_fisik'])->format('m');
-    $bulan_romawi = getBulanRomawi($bulan);
-    $tahun = date("Y");
+function generateKode($kode){
 
-    if(is_numeric($max)) {
-        $max += 1;
-    } else {
-        $max = 1;
-    }
+    return $value = strtoupper(preg_replace("/[^bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]/", "", $kode));
 
-    $output = [
-        'urutan' => $max,
-        'nomor_surat' => "$max/$kode/$bulan_romawi/$tahun"
-    ];
-
-    return $output;
 }
 
-function variabelReplace($param) {
-    $perihal = $param['perihal'];
-    $tgl_surat_fisik = $param['tgl_surat_fisik'];
-    $tujuan = $param['tujuan'];
-    $email_tujuan = $param['email_tujuan'];
-    $ukuran_ttd = $param['ukuran_ttd'];
-    $nomor_surat = $param['nomor_surat'];
-    $konten = $param['konten'];
-    $nama_pembuat = Auth::user()->nama;
-    $email_pembuat = Auth::user()->email;
+function GenerateNomorSurat($tanggal, $sifat, $perihal) {
+    $date = strtotime($tanggal);
+    $date_format = date('Y-m-d',$date);
+    $tanggal = substr($date_format,8,2);
+    $bulan = substr($date_format,5,2);
+    $bulan_romawi = getBulanRomawi($bulan);
+    $tahun = substr($date_format,2,2);
 
-    $variabel = array('=NoSurat=', '=Nama=', '=Email=', '=Perihal=', '=TglSurat=', '=Tujuan=', '=EmailTujuan=');
-    $replace = array($nomor_surat, $nama_pembuat, $email_pembuat, $perihal, tglIndo($tgl_surat_fisik), $tujuan, $email_tujuan);
+    $sft = generateKode($sifat);
+    $nama = generateKode($perihal);
 
-    $konten_surat = str_replace($variabel, $replace, $konten);
-
-    return $konten_surat;
+    return $kode = $nama . '/' . $sft . '/' . $tanggal . '/' . $bulan_romawi . '/' . $tahun;
 }
