@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ManagemenanggotaController;
+use App\Http\Controllers\MenyetujuisuratController;
 use App\Http\Controllers\SuratController;
 
 /*
@@ -32,8 +33,13 @@ Route::middleware(['auth'])->group(function () {
         return view('index');
     })->name('dashboard');
 
+    // Route::middleware('admin', 'pimpinan')->group(function() {
+    //     Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
+    // });
+
     // hak akses untuk admin
     Route::middleware('admin')->group(function() {
+        Route::get('/surat-masuk-admin', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukAdmin');
 
         Route::resource('/managemen-anggota', ManagemenanggotaController::class);
     });
@@ -66,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
 
     // hak akses untuk kepala biro
     Route::middleware('kepalabiro')->group(function() {
-
+        Route::get('/surat',[MenyetujuisuratController::class, 'index'])->name('menyetujuiSurat');
     });
 
 

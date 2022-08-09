@@ -94,7 +94,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="#">Surat Masuk</a>
+                            <a href="{{route('menyetujuiSurat')}}">Surat Masuk</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="#">Surat Keluar</a>
@@ -111,6 +111,12 @@
 
 
             @if (Auth::user()->level == 'admin')
+            <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
+                <a href="{{route('suratMasukAdmin')}}" class='sidebar-link'>
+                    <i class="bi bi-file-arrow-up-fill"></i>
+                    <span>Surat Masuk</span>
+                </a>
+            </li>
             <li class="sidebar-item {{ Request::is('managemen-anggota') ? 'active' : '' }}">
                 <a href="{{route('managemen-anggota.index')}}" class='sidebar-link'>
                     <i class="bi bi-person-badge-fill"></i>
