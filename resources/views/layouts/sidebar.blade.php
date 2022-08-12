@@ -85,6 +85,18 @@
                         </li>
                     </ul>
                 </li>
+                <li class="sidebar-item ">
+                    <a href="{{route('disposisi')}}" class='sidebar-link'>
+                        <i class="bi bi-chat-left-dots-fill"></i>
+                        <span>Disposisi</span>
+                    </a>
+                </li>
+                <li class="sidebar-item ">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-archive-fill"></i>
+                        <span>Laporan</span>
+                    </a>
+                </li>
             @endif
             @if (Auth::user()->level == 'kepalabiro')
                 <li class="sidebar-item  has-sub">
@@ -101,13 +113,15 @@
                         </li>
                     </ul>
                 </li>
+                <li class="sidebar-item ">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-archive-fill"></i>
+                        <span>Laporan</span>
+                    </a>
+                </li>
             @endif
-            <li class="sidebar-item ">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-chat-left-dots-fill"></i>
-                    <span>Disposisi</span>
-                </a>
-            </li>
+
+            
 
 
             @if (Auth::user()->level == 'admin')

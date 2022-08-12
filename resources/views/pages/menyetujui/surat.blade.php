@@ -62,13 +62,31 @@
                                     @if ($row->status_surat == 'ditolak')
                                     <div class="badge bg-danger">{{$row->status_surat}}</div>
                                     @endif
+                                    @if ($row->status_surat == 'revisi')
+                                    <div class="badge bg-info">{{$row->status_surat}}</div>
+                                    @endif
 
                                 </td>
                                 <td>
-                                    <a href="#" class="btn icon icon-left btn-success"><i class="bi bi-file-earmark-check"></i>
-                                    Setujui</a>
-                                    <a href="#" class="btn icon icon-left btn-warning"><i class="bi bi-file-earmark-excel"></i>
-                                        Belum disetujui</a>
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                        id="dropdownMenuButtonEmoji" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="bi bi-file-check-fill"></i>Pilih
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonEmoji">
+                                        <a class="dropdown-item" href="disetujui/{{$row->id}}"><i class="bi bi-file-earmark-check-fill"></i>
+                                            Setujui
+                                        </a>
+                                        <a class="dropdown-item" href="ditunda/{{$row->id}}"><i class="bi bi-file-earmark-minus-fill"></i>
+                                            Tunda
+                                        </a>
+                                        <a class="dropdown-item" href="ditolak/{{$row->id}}"><i class="bi bi-file-earmark-excel-fill"></i>
+                                            Tolak
+                                        </a>
+                                        <a class="dropdown-item" href="direvisi/{{$row->id}}"><i class="bi bi-file-earmark-plus-fill"></i>
+                                            Revisi
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DisposisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ManagemenanggotaController;
@@ -47,6 +48,8 @@ Route::middleware(['auth'])->group(function () {
     // hak akses untuk pimpinan
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
+        Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
+
     });
 
     // hak akses untuk tu
@@ -61,7 +64,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadDokumen');
 
 
-
         Route::get('/surat-baru/create', [SuratController::class, 'suratBaru'])->name('suratbaru');
         Route::post('/surat-baru/create', [SuratController::class, 'createSurat']);
         
@@ -73,6 +75,11 @@ Route::middleware(['auth'])->group(function () {
     // hak akses untuk kepala biro
     Route::middleware('kepalabiro')->group(function() {
         Route::get('/surat',[MenyetujuisuratController::class, 'index'])->name('menyetujuiSurat');
+        Route::get('/disetujui/{id}', [MenyetujuisuratController::class, 'setujui']);
+        Route::get('/ditolak/{id}', [MenyetujuisuratController::class, 'tolak']);
+        Route::get('/ditunda/{id}', [MenyetujuisuratController::class, 'tunda']);
+        Route::get('/direvisi/{id}', [MenyetujuisuratController::class, 'revisi']);
+
     });
 
 

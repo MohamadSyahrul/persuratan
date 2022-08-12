@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 
 class DisposisiController extends Controller
@@ -14,7 +15,9 @@ class DisposisiController extends Controller
      */
     public function index()
     {
-        //
+        $pagename = "Disposisi";
+        $disposisi = SuratKeluar::all();
+        return view('pages.disposisi', compact('disposisi', 'pagename'));
     }
 
     /**
