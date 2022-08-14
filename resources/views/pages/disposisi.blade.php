@@ -35,7 +35,7 @@
                         <tr>
                             <th>No Surat</th>
                             <th>Nama Penerima</th>
-                            <th>Tanggal Surat</th>
+                            <th>Batas Disposisi</th>
                             <th>Dokumen</th>
                             <th>Status</th>
                         </tr>
@@ -43,29 +43,13 @@
                     <tbody>
                         @foreach ($disposisi as $item)
                             <tr>
-                                <td>{{$item->no_surat}}</td>
-                                <td>{{$item->user->nama}}</td>
-                                <td>{{$item->tgl_surat}}</td>
+                                <td>{{$item->surat->no_surat}}</td>
+                                <td>{{$item->namapenerima->nama}}</td>
+                                <td>{{$item->batas_waktu}}</td>
                                 <td>
-                                    <a href="{{route('downloadDokumen', $item->dokumen)}}">
-                                        {{$item->dokumen ?? 'dokumen'}}
-                                    </a>
+                                        {{$item->surat->dokumen ?? 'dokumen'}}
                                 </td>
-                                <td>
-                                    @if ($item->status_surat == 'pending')
-                                        <div class="badge bg-warning">{{$item->status_surat}}</div>
-                                    @endif
-                                    @if ($item->status_surat == 'disetujui')
-                                    <div class="badge bg-success">{{$item->status_surat}}</div>
-                                    @endif
-                                    @if ($item->status_surat == 'ditolak')
-                                    <div class="badge bg-danger">{{$item->status_surat}}</div>
-                                    @endif
-                                    @if ($item->status_surat == 'revisi')
-                                    <div class="badge bg-info">{{$item->status_surat}}</div>
-                                    @endif
-
-                                </td>
+                                    <td>{{$item->status_disposisi}}</td>
                             </tr>
                         @endforeach
                     </tbody>

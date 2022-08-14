@@ -6,6 +6,7 @@ use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ManagemenanggotaController;
 use App\Http\Controllers\MenyetujuisuratController;
 use App\Http\Controllers\SuratController;
+use App\Models\SuratKeluar;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,17 @@ Route::get('/create-surat', function(){
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('index');
+        $setuju = SuratKeluar::where('status_surat', 'disetujui')->count();
+        $tolak = SuratKeluar::where('status_surat', 'ditolak')->count();
+        $revisi = SuratKeluar::where('status_surat', 'revisi')->count();
+        $pending = SuratKeluar::where('status_surat', 'pending')->count();
+
+        return view('index', [
+            'setuju' => $setuju,
+            'tolak' => $tolak,
+            'revisi' => $revisi,
+            'pending' => $pending
+        ]);
     })->name('dashboard');
 
     // Route::middleware('admin', 'pimpinan')->group(function() {
@@ -49,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
         Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
+        Route::post('/disposisi-surat', [DisposisiController::class, 'disposisisurat'])->name('dispo');
 
     });
 

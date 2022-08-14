@@ -132,3 +132,17 @@ function GenerateNomorSurat($tanggal, $sifat, $perihal) {
 
     return $kode = $nama . '/' . $sft . '/' . $tanggal . '/' . $bulan_romawi . '/' . $tahun;
 }
+
+function KodeDispo($tanggal, $sifat, $status) {
+    $date = strtotime($tanggal);
+    $date_format = date('Y-m-d',$date);
+    $tanggal = substr($date_format,8,2);
+    $bulan = substr($date_format,5,2);
+    $bulan_romawi = getBulanRomawi($bulan);
+    $tahun = substr($date_format,2,2);
+
+    $sft = generateKode($sifat);
+    $status = generateKode($status);
+
+    return $kode = $status . '/' . $sft . '/' . $tanggal . '/' . $bulan_romawi . '/' . $tahun;
+}

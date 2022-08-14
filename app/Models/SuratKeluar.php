@@ -17,6 +17,10 @@ class SuratKeluar extends Model
         return $this->belongsTo(User::class, 'id_penerima');
     }
 
+    public function pembuat() {
+        return $this->belongsTo(User::class, 'id_pembuat');
+    }
+
     public function ttd() {
         return $this->belongsTo(User::class, 'id_ttd');
     }

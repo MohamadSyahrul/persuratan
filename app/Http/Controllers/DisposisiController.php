@@ -16,73 +16,14 @@ class DisposisiController extends Controller
     public function index()
     {
         $pagename = "Disposisi";
-        $disposisi = SuratKeluar::all();
+        $disposisi = Disposisi::with(['namapenerima', 'surat'])->get();
         return view('pages.disposisi', compact('disposisi', 'pagename'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Disposisi  $disposisi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Disposisi $disposisi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Disposisi  $disposisi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Disposisi $disposisi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Disposisi  $disposisi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Disposisi $disposisi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Disposisi  $disposisi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Disposisi $disposisi)
-    {
-        //
+    public function disposisisurat(Request $request){
+        $dispo = $request->all();
+        $dispo['kode_disposisi'] = KodeDispo($request->batas_waktu, $request->sifat, $request->status_disposisi);
+        Disposisi::create($dispo);
+        return redirect()->route('suratMasukPimpinan')->with('success', 'Surat berhasil di disposisikan !');
     }
 }
