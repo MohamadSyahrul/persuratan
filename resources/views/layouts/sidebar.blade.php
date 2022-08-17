@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item ">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{route('laporan')}}" class='sidebar-link'>
                         <i class="bi bi-archive-fill"></i>
                         <span>Laporan</span>
                     </a>
@@ -114,7 +114,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item ">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{route('laporan')}}" class='sidebar-link'>
                         <i class="bi bi-archive-fill"></i>
                         <span>Laporan</span>
                     </a>

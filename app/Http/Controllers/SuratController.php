@@ -117,4 +117,12 @@ class SuratController extends Controller
             $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)->get();
             return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename', 'user'));
     }
+    // public function suratKeluarPimpinan()
+    // {
+    //         $pagename = "Surat Keluar";
+    //         $user = User::all();
+    //         // dd($user);
+    //         $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)->get();
+    //         return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename', 'user'));
+    // }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DisposisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ManagemenanggotaController;
 use App\Http\Controllers\MenyetujuisuratController;
 use App\Http\Controllers\SuratController;
@@ -59,9 +60,11 @@ Route::middleware(['auth'])->group(function () {
     // hak akses untuk pimpinan
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
+        // Route::get('/surat-keluar-pimpinan', [SuratController::class, 'suratKeluarPimpinan'])->name('suratKeluarPimpinan');
         Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
         Route::post('/disposisi-surat', [DisposisiController::class, 'disposisisurat'])->name('dispo');
 
+        Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
     });
 
     // hak akses untuk tu

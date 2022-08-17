@@ -24,6 +24,11 @@
                     </div>
                     <h1 class="auth-title">Masuk Aplikasi Surat.</h1>
                     {{-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p> --}}
+                    @error(session('status'))
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -33,6 +38,7 @@
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
+
                         </div>
 
                         <div class="form-group position-relative has-icon-left mb-4">
@@ -45,9 +51,9 @@
                         <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Masuk</button>
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Don't have an account? <a href="{{route('register')}}"
+                        {{-- <p class="text-gray-600">Don't have an account? <a href="{{route('register')}}"
                                 class="font-bold">Sign
-                                up</a>.</p>
+                                up</a>.</p> --}}
                     </div>
                 </div>
             </div>
