@@ -47,11 +47,22 @@
                             <td>{{$row->no_surat}}</td>
                             <td>{{$row->user->nama}}</td>
                             <td>{{$row->tgl_surat}}</td>
-                            <td>
-                                <a href="{{route('downloadDokumen', $row->dokumen)}}">
-                                    {{$row->dokumen ?? 'dokumen'}}
-                                </a>
-                            </td>
+                            @if (Auth::user()->level == 'tu')
+                                <td>
+                                    <a href="{{route('downloadDokumen', $row->dokumen)}}">
+                                        {{$row->dokumen ?? 'dokumen'}}
+                                    </a>
+                                </td>
+                            @endif
+                            @if (Auth::user()->level == 'pimpinan')
+                                <td>
+                                    <a href="{{route('downloadpimpinan', $row->dokumen)}}">
+                                        {{$row->dokumen ?? 'dokumen'}}
+                                    </a>
+                                </td>
+                            @endif
+                            
+
                             <td>
                                 @if ($row->status_surat == 'pending')
                                 <div class="badge bg-warning">{{$row->status_surat}}</div>

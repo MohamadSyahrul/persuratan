@@ -58,17 +58,29 @@
                                                 <label for="country-floating">Tujuan Surat</label>
                                             
                                                     <select class="form-select" id="basicSelect" name="id_penerima">
+                                                        <option>Pilih tujuan surat...</option>
                                                         @foreach ($user as $item)
                                                             <option value="{{$item->id}}">{{$item->nama}}</option>
                                                         @endforeach
                                                     </select>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="date-surat">Tanggal Surat</label>
                                                 <input type="date" id="date-surat" class="form-control"
                                                     name="tgl_surat">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="country-floating">Klasifikasi Surat</label>
+                                                    <select class="form-select" id="klasifikasi" name="id_klasifikasi" required>
+                                                        <option>Pilih klasifikasi...</option>
+                                                        @foreach ($klasifikasi as $row)
+                                                            <option value="{{$row->id}}">{{$row->nama_klasifikasi}}</option>
+                                                        @endforeach
+                                                    </select>
                                             </div>
                                         </div>
                                         <div class="col-12">

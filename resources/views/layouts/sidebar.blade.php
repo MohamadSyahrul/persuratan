@@ -59,7 +59,7 @@
                 <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
                     <a href="{{route('suratKeluar')}}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-arrow-down-fill"></i>
-                        <span>Surat Baru</span>
+                        <span>Surat Keluar</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
@@ -81,7 +81,7 @@
                             <a href="{{route('suratMasukPimpinan')}}">Surat Masuk</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="#">Surat Keluar</a>
+                            <a href="{{url('surat-keluar-piminan')}}">Surat Keluar</a>
                         </li>
                     </ul>
                 </li>
@@ -114,7 +114,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item ">
-                    <a href="{{route('laporan')}}" class='sidebar-link'>
+                    <a href="{{route('laporankepalabiro')}}" class='sidebar-link'>
                         <i class="bi bi-archive-fill"></i>
                         <span>Laporan</span>
                     </a>
@@ -126,15 +126,33 @@
 
             @if (Auth::user()->level == 'admin')
             <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
+                <a href="{{route('inputsurat')}}" class='sidebar-link'>
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Input Surat</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
                 <a href="{{route('suratMasukAdmin')}}" class='sidebar-link'>
                     <i class="bi bi-file-arrow-up-fill"></i>
                     <span>Surat Masuk</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
+                <a href="{{route('suratKeluar')}}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                    <span>Surat Keluar</span>
                 </a>
             </li>
             <li class="sidebar-item {{ Request::is('managemen-anggota') ? 'active' : '' }}">
                 <a href="{{route('managemen-anggota.index')}}" class='sidebar-link'>
                     <i class="bi bi-person-badge-fill"></i>
                     <span>Managemen Anggota</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
+                <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
+                    <i class="bi bi-layers-fill"></i>
+                    <span>Klasifikasi Surat</span>
                 </a>
             </li>
             @endif

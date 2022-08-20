@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
 use App\Models\User;
 use App\Models\Klasifikasi;
 use App\Models\SuratKeluar;
@@ -13,8 +14,14 @@ use Illuminate\Support\Facades\Storage;
 class SuratController extends Controller
 {
     public function index(){
-        $user = User::all();
-        return view('pages.surat.suratbaru.createsurat', compact('user'));
+        $klasifikasi = Klasifikasi::all();
+        $user = User::where(function($query) {
+                        return $query->where('level','pimpinan')
+                        ->orWhere('level','admin');
+                    })
+                    ->get();
+                    // dd($user);
+        return view('pages.surat.suratbaru.createsurat', compact('user', 'klasifikasi'));
     }
 
     public function createBaru(Request $request)
@@ -114,15 +121,23 @@ class SuratController extends Controller
             $pagename = "Surat Masuk";
             $user = User::all();
             // dd($user);
-            $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)->get();
+            $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)
+                                        ->where('status_surat', 'disetujui')
+                                        ->where('status_dispo', 'belum')
+                                        ->get();
             return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename', 'user'));
     }
-    // public function suratKeluarPimpinan()
-    // {
-    //         $pagename = "Surat Keluar";
-    //         $user = User::all();
-    //         // dd($user);
-    //         $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)->get();
-    //         return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename', 'user'));
-    // }
+
+    public function suratMasukAdmin()
+    {
+            $pagename = "Surat Masuk";
+            $user = User::all();
+            $disposisi = Disposisi::with('surat','namapenerima')->get();
+            $suratmasuk = SuratKeluar::where('id_penerima', Auth::user()->id)
+                                        ->where('status_surat', 'disetujui')
+                                        ->where('status_dispo', 'belum')
+                                        ->get();
+            // dd($suratmasuk);
+            return view('pages.admin.suratmasuk', compact('suratmasuk', 'pagename', 'user', 'disposisi'));
+    }
 }

@@ -35,13 +35,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $setuju = SuratKeluar::where('status_surat', 'disetujui')->count();
         $tolak = SuratKeluar::where('status_surat', 'ditolak')->count();
-        $revisi = SuratKeluar::where('status_surat', 'revisi')->count();
+        $total = SuratKeluar::count();
         $pending = SuratKeluar::where('status_surat', 'pending')->count();
 
         return view('index', [
             'setuju' => $setuju,
             'tolak' => $tolak,
-            'revisi' => $revisi,
+            'total' => $total,
             'pending' => $pending
         ]);
     })->name('dashboard');
@@ -52,26 +52,33 @@ Route::middleware(['auth'])->group(function () {
 
     // hak akses untuk admin
     Route::middleware('admin')->group(function() {
-        Route::get('/surat-masuk-admin', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukAdmin');
-
+        Route::get('/surat-masuk-admin', [SuratController::class, 'suratMasukAdmin'])->name('suratMasukAdmin');
+        Route::get('/input-surat', [SuratController::class, 'index'])->name('inputsurat');
         Route::resource('/managemen-anggota', ManagemenanggotaController::class);
+
+        Route::get('/admin/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadadmin');
+
     });
     
     // hak akses untuk pimpinan
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
-        // Route::get('/surat-keluar-pimpinan', [SuratController::class, 'suratKeluarPimpinan'])->name('suratKeluarPimpinan');
+        Route::get('/surat-keluar-piminan', [DisposisiController::class, 'suratKeluardispo']);
         Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
         Route::post('/disposisi-surat', [DisposisiController::class, 'disposisisurat'])->name('dispo');
-
+        
+        Route::get('/pimpinan/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadpimpinan');
+        
         Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
     });
+    
+    Route::resource('/klasifikasi', KlasifikasiController::class);
+    Route::post('/create-surat', [SuratController::class, 'createBaru'])->name('createBaru');
+    Route::get('/surat-keluar', [SuratController::class, 'suratKeluar'])->name('suratKeluar');
 
     // hak akses untuk tu
     Route::middleware('tu')->group(function() {
         Route::get('/surat-baru', [SuratController::class, 'index']);
-        Route::post('/create-surat', [SuratController::class, 'createBaru'])->name('createBaru');
-        Route::get('/surat-keluar', [SuratController::class, 'suratKeluar'])->name('suratKeluar');
         Route::get('/edit-surat/{id}', [SuratController::class, 'editSurat'])->name('editSurat');
         Route::put('/update-surat/{id}', [SuratController::class, 'updateSurat'])->name('updateSurat');
         Route::delete('/delete-surat/{id}', [SuratController::class, 'deleteSurat'])->name('deleteSurat');
@@ -82,10 +89,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/surat-baru/create', [SuratController::class, 'suratBaru'])->name('suratbaru');
         Route::post('/surat-baru/create', [SuratController::class, 'createSurat']);
         
-        Route::resource('/klasifikasi', KlasifikasiController::class);
     });
-
-
 
     // hak akses untuk kepala biro
     Route::middleware('kepalabiro')->group(function() {
@@ -94,6 +98,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/ditolak/{id}', [MenyetujuisuratController::class, 'tolak']);
         Route::get('/ditunda/{id}', [MenyetujuisuratController::class, 'tunda']);
         Route::get('/direvisi/{id}', [MenyetujuisuratController::class, 'revisi']);
+
+        Route::get('/laporan-kepalabiro', [LaporanController::class, 'index'])->name('laporankepalabiro');
+
+        Route::get('/kepalabiro/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadkepalabiro');
 
     });
 

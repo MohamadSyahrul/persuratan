@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('dokumen')->nullable();
             $table->unsignedBigInteger('id_penerima');
             $table->unsignedBigInteger('id_pembuat');
+            $table->unsignedBigInteger('id_klasifikasi');
             $table->unsignedBigInteger('id_ttd')->nullable();
             $table->timestamps();
 

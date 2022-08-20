@@ -48,7 +48,7 @@
                                 <td>{{$row->user->nama}}</td>
                                 <td>{{$row->tgl_surat}}</td>
                                 <td>
-                                    <a href="{{route('downloadDokumen', $row->dokumen)}}">
+                                    <a href="{{route('downloadkepalabiro', $row->dokumen)}}">
                                         {{$row->dokumen ?? 'dokumen'}}
                                     </a>
                                 </td>
@@ -82,9 +82,6 @@
                                         </a>
                                         <a class="dropdown-item" href="ditolak/{{$row->id}}"><i class="bi bi-file-earmark-excel-fill"></i>
                                             Tolak
-                                        </a>
-                                        <a class="dropdown-item" href="direvisi/{{$row->id}}"><i class="bi bi-file-earmark-plus-fill"></i>
-                                            Revisi
                                         </a>
                                     </div>
                                 </td>
