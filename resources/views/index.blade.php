@@ -108,6 +108,21 @@
                     </div>
                 </div>
             </section>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Statistik Surat Perbulan</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="bar-chart" width="500" height="150"></canvas>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         @endif
     </div>
     
@@ -115,4 +130,31 @@
 
 @push('script')
     <script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+            let setuju = <?= $setuju ?>;
+            let tolak = <?= $tolak ?>;
+            let pending = <?= $pending ?>;
+        new Chart(document.getElementById("bar-chart"), {
+            type: 'bar',
+            data: {
+            labels: ["Disetujui", "Ditolak", "Pending"],
+            datasets: [
+                {
+                label: "Surat",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                data: [setuju,tolak,pending]
+                }
+            ]
+            },
+            options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'statistik surat'
+            }
+            }
+        });
+    </script>
 @endpush
