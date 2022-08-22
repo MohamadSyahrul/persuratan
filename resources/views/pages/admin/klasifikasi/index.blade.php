@@ -93,8 +93,8 @@
                     <tbody>
                         @foreach ($klasifikasi as $row)
                         <tr>
-                            <td>{{$row->nama_klasifikasi}}</td>
                             <td>{{$row->kode_klasifikasi}}</td>
+                            <td>{{$row->nama_klasifikasi}}</td>
 
                             <td>
                                 <a href="#" class="btn icon btn-warning" data-bs-toggle="modal"
