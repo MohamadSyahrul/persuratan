@@ -50,11 +50,25 @@
                                     <input class="form-control" required aria-required="true" id="nama" name="nama"
                                         type="text">
                                     </div>
+                                    <label for="username">Username</label>
+                                    <div class="form-group">
+                                    <input class="form-control" required aria-required="true" id="username" name="username"
+                                        type="text">
+                                    </div>
                                     <label for="email">Email</label>
                                     <div class="form-group">
                                     <input class="form-control" required aria-required="true" id="email" name="email"
                                         type="text">
                                     </div>
+                                    <label for="country-floating">Level User</label>         
+                                    <select class="form-select" id="basicSelect" name="level">
+                                        <option>Pilih level...</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="tu">TU</option>
+                                            <option value="pimpinan">Pimpinan</option>
+                                            <option value="kepalabiro">Kepala Biro</option>
+
+                                    </select>
                                     <label for="foto">Foto</label>
                                     <div class="form-group">
                                     <input type="file" id="input-file-now" name="foto" class="form-control"
@@ -88,6 +102,8 @@
                             <th>Foto</th>
                             <th>Nik</th>
                             <th>Nama</th>
+                            <th>Username</th>
+                            <th>Level</th>
                             <th>Email</th>
                             <th>TTD</th>
                             <th>Aksi</th>
@@ -107,6 +123,8 @@
                                 </td>
                                 <td>{{$item->nik}}</td>
                                 <td>{{$item->nama}}</td>
+                                <td>{{$item->username}}</td>
+                                <td>{{$item->level}}</td>
                                 <td>{{$item->email}}</td>
                                 <td>
                                     @if ($item->ttd)
@@ -148,11 +166,25 @@
                                                         <input class="form-control" required aria-required="true" value="{{ $item->nama }}" id="nama" name="nama"
                                                             type="text">
                                                         </div>
+                                                        <label for="username">Username</label>
+                                                        <div class="form-group">
+                                                        <input class="form-control" required aria-required="true" value="{{ $item->username }}" id="username" name="username"
+                                                            type="text">
+                                                        </div>
                                                         <label for="email">Email</label>
                                                         <div class="form-group">
                                                         <input class="form-control" required aria-required="true" value="{{ $item->email }}" id="email" name="email"
                                                             type="text">
                                                         </div>
+                                                        <label for="country-floating">Level User</label>         
+                                                        <select class="form-select" id="basicSelect" name="level">
+                                                            <option value="{{$item->level}}">Level saat ini : {{$item->level}}</option>
+                                                                <option value="admin">Admin</option>
+                                                                <option value="tu">TU</option>
+                                                                <option value="pimpinan">Pimpinan</option>
+                                                                <option value="kepalabiro">Kepala Biro</option>
+                    
+                                                        </select>
                                                         <label for="foto">Foto</label>
                                                         <div class="form-group">
                                                         <input type="file" id="input-file-now" name="foto" class="form-control"

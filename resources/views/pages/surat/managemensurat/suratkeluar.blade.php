@@ -7,13 +7,13 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Surat Masuk</h3>
+                <h3>{{$pagename}}</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Surat Masuk</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$pagename}}</li>
                     </ol>
                 </nav>
             </div>
@@ -22,7 +22,7 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-            Data Surat Masuk
+            Data {{$pagename}}
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">

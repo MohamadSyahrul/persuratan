@@ -61,6 +61,13 @@
                                     </a>
                                 </td>
                             @endif
+                            @if (Auth::user()->level == 'admin')
+                                <td>
+                                    <a href="{{route('downloadadmin', $row->dokumen)}}">
+                                        {{$row->dokumen ?? 'dokumen'}}
+                                    </a>
+                                </td>
+                            @endif
                             
 
                             <td>

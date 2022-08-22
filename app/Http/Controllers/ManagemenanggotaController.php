@@ -41,10 +41,11 @@ class ManagemenanggotaController extends Controller
     {
             $input = [
                 'nama' => $request->nama,
+                'username' => $request->username,
+                'level' => $request->level,
                 'nik' => $request->nik,
                 'email' => $request->email,
                 'password' => Hash::make($request->nik),
-                'level' => 'user',
             ];
             
             if ($request->hasFile('ttd')) {
@@ -104,6 +105,9 @@ class ManagemenanggotaController extends Controller
             'nama' => $request->nama,
             'nik' => $request->nik,
             'email' => $request->email,
+            'username' => $request->username,
+            'level' => $request->level,
+
         ];
 
         if ($request->hasFile('foto')) {

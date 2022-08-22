@@ -113,7 +113,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Statistik Surat Perbulan</h4>
+                            <h4>Statistik Surat</h4>
                         </div>
                         <div class="card-body">
                             <canvas id="bar-chart" width="500" height="150"></canvas>
