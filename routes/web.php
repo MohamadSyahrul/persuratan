@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\DisposisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlasifikasiController;
@@ -56,25 +57,34 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/input-surat', [SuratController::class, 'index'])->name('inputsurat');
         Route::resource('/managemen-anggota', ManagemenanggotaController::class);
 
+        Route::get('/admin/surat-keluar', [SuratController::class, 'suratKeluar'])->name('suratKeluarAdmin');
+
         Route::get('/admin/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadadmin');
+
+        Route::get('admin/arsip-surat', [ArsipController::class, 'arsip'])->name('arsipAdmin');
+
+        Route::get('laporan-surat-masuk', [LaporanController::class, 'laporansm'])->name('laporansuratmasuk');
 
     });
     
+    Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
     // hak akses untuk pimpinan
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
-        Route::get('/surat-keluar-piminan', [DisposisiController::class, 'suratKeluardispo']);
-        Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
+        Route::get('/surat-keluar-pimpinan', [SuratController::class, 'suratKeluarPimpinan']);
         Route::post('/disposisi-surat', [DisposisiController::class, 'disposisisurat'])->name('dispo');
         
         Route::get('/pimpinan/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadpimpinan');
         
         Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
+
+        Route::get('pimpinan/arsip-surat', [ArsipController::class, 'arsip'])->name('arsipPimpinan');
+
     });
     
     Route::resource('/klasifikasi', KlasifikasiController::class);
     Route::post('/create-surat', [SuratController::class, 'createBaru'])->name('createBaru');
-    Route::get('/surat-keluar', [SuratController::class, 'suratKeluar'])->name('suratKeluar');
+    Route::Post('/surat-keluar', [SuratController::class, 'createPimpinan'])->name('createPimpinan');
 
     // hak akses untuk tu
     Route::middleware('tu')->group(function() {
@@ -85,19 +95,27 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/detail-surat/{id}', [SuratController::class, 'detailSurat'])->name('detailSurat');
         Route::get('/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadDokumen');
 
+        Route::get('/tu/surat-keluar', [SuratController::class, 'suratKeluar'])->name('suratKeluarTU');
 
         Route::get('/surat-baru/create', [SuratController::class, 'suratBaru'])->name('suratbaru');
         Route::post('/surat-baru/create', [SuratController::class, 'createSurat']);
+
         
     });
 
     // hak akses untuk kepala biro
     Route::middleware('kepalabiro')->group(function() {
         Route::get('/surat',[MenyetujuisuratController::class, 'index'])->name('menyetujuiSurat');
+        
         Route::get('/disetujui/{id}', [MenyetujuisuratController::class, 'setujui']);
         Route::get('/ditolak/{id}', [MenyetujuisuratController::class, 'tolak']);
         Route::get('/ditunda/{id}', [MenyetujuisuratController::class, 'tunda']);
-        Route::get('/direvisi/{id}', [MenyetujuisuratController::class, 'revisi']);
+        // Route::get('/direvisi/{id}', [MenyetujuisuratController::class, 'revisi']);
+
+        Route::get('/surat-keluar',[MenyetujuisuratController::class, 'suratkeluar'])->name('menyetujuiSuratKeluar');
+        Route::get('/setujui/{id}', [MenyetujuisuratController::class, 'setujuikel']);
+        Route::get('/arsipkan/{id}', [MenyetujuisuratController::class, 'arsipkan']);
+        Route::get('/proses/{id}', [MenyetujuisuratController::class, 'proses']);
 
         Route::get('/laporan-kepalabiro', [LaporanController::class, 'index'])->name('laporankepalabiro');
 

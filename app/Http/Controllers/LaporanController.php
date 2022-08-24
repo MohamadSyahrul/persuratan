@@ -10,8 +10,13 @@ class LaporanController extends Controller
 {
     public function index(){
         $pagename = "Laporan Surat";
-        $pimpinan = SuratKeluar::with('user')->where('id_penerima', Auth::user()->id)->get();
-        $laporan = SuratKeluar::with('user')->get();
-        return view('pages.laporan', compact('pagename', 'laporan' , 'pimpinan'));
+        $laporan = SuratKeluar::all();
+        return view('pages.laporan', compact('pagename', 'laporan'));
+    }
+
+    public function laporansm(){
+        $pagename = "Laporan Surat Masuk";
+        $laporan = SuratKeluar::where('surat', 'masuk')->get();
+        return view('pages.admin.laporansuratmasuk', compact('pagename', 'laporan'));
     }
 }

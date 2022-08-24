@@ -34,10 +34,8 @@
                     <thead>
                         <tr>
                             <th>No Surat</th>
-                            <th>Nama Penerima</th>
                             <th>Tanggal Surat</th>
                             <th>Dokumen</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,25 +44,13 @@
                             @foreach ($disposisi as $item)
                                 <tr>
                                     <td>{{$item->surat->no_surat}}</td>
-                                    <td>{{$item->namapenerima->nama}}</td>
                                     <td>{{$item->surat->tgl_surat}}</td>
                                     <td>
                                         <a href="{{route('downloadadmin', $item->surat->dokumen)}}">
                                             {{$item->surat->dokumen}}
                                         </a>
                                     </td>
-                                    <td>
-                                        @if ($item->surat->status_surat == 'pending')
-                                        <div class="badge bg-warning">{{$item->surat->status_surat}}</div>
-                                        @endif
-                                        @if ($item->surat->status_surat == 'disetujui')
-                                        <div class="badge bg-success">{{$item->surat->status_surat}}</div>
-                                        @endif
-                                        @if ($item->surat->status_surat == 'ditolak')
-                                        <div class="badge bg-danger">{{$item->surat->status_surat}}</div>
-                                        @endif
-        
-                                    </td>
+                                  
                                 </tr>
                             @endforeach    
                         @endif
@@ -72,25 +58,13 @@
                         @foreach ($suratmasuk as $row)
                         <tr>
                             <td>{{$row->no_surat}}</td>
-                            <td>{{$row->user->nama}}</td>
                             <td>{{$row->tgl_surat}}</td>
                             <td>
                                 <a href="{{route('downloadadmin', $row->dokumen)}}">
                                     {{$row->dokumen ?? 'dokumen'}}
                                 </a>
                             </td>
-                            <td>
-                                @if ($row->status_surat == 'pending')
-                                <div class="badge bg-warning">{{$row->status_surat}}</div>
-                                @endif
-                                @if ($row->status_surat == 'disetujui')
-                                <div class="badge bg-success">{{$row->status_surat}}</div>
-                                @endif
-                                @if ($row->status_surat == 'ditolak')
-                                <div class="badge bg-danger">{{$row->status_surat}}</div>
-                                @endif
-
-                            </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>

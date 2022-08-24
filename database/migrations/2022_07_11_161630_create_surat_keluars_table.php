@@ -19,16 +19,16 @@ return new class extends Migration
             $table->date('tgl_surat');
             $table->string('perihal');
             $table->string('sifat');
+            $table->string('asal_surat');
+            $table->string('keterangan');
             $table->enum('status_surat', ['disetujui', 'ditolak', 'pending'])->default('pending');
-            $table->enum('status_ttd', ['disetujui', 'ditolak', 'pending'])->default('pending');
+            $table->enum('surat', ['masuk', 'keluar'])->default('keluar');
             $table->text('dokumen')->nullable();
-            $table->unsignedBigInteger('id_penerima');
             $table->unsignedBigInteger('id_pembuat');
             $table->unsignedBigInteger('id_klasifikasi');
             $table->unsignedBigInteger('id_ttd')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_penerima')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_pembuat')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_ttd')->references('id')->on('users');
         });

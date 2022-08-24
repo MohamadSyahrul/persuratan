@@ -13,9 +13,9 @@ class SuratKeluar extends Model
     protected $guarded = [];
 
 
-    public function user() {
-        return $this->belongsTo(User::class, 'id_penerima');
-    }
+    // public function user() {
+    //     return $this->belongsTo(User::class, 'id_penerima');
+    // }
 
     public function disposisi() {
         return $this->hasMany(Disposisi::class, 'id_surat');

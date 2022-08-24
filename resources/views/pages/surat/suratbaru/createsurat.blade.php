@@ -34,9 +34,9 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="no_surat-label">Nomor Surat</label>
-                                                <input type="text" id="no_surat-label" class="form-control" disabled
-                                                    placeholder="Nomor Surat di Generate Otomatis" name="no_surat">
+                                                <label for="no_surat-label">No Surat</label>
+                                                <input type="text" id="no_surat-label" class="form-control"
+                                                    placeholder="Masukan No Surat" name="no_surat">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -55,14 +55,9 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="country-floating">Tujuan Surat</label>
-                                            
-                                                    <select class="form-select" id="basicSelect" name="id_penerima">
-                                                        <option>Pilih tujuan surat...</option>
-                                                        @foreach ($user as $item)
-                                                            <option value="{{$item->id}}">{{$item->nama}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <label for="masukan-sifat">Asal Surat</label>
+                                                <input type="text" id="company-column" class="form-control"
+                                                    name="asal_surat" placeholder="Masukan asal surat">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -83,11 +78,18 @@
                                                     </select>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="dokumen">Dokumen</label>
                                                 <input type="file" id="dokumen" class="form-control"
-                                                    name="dokumen" placeholder="file" required>
+                                                    name="dokumen" placeholder="Masukan File Surat" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="keterangan">Keterangan</label>
+                                                <input type="text" id="keterangan" class="form-control"
+                                                    name="keterangan" placeholder="Masukan Keterangan" required>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">

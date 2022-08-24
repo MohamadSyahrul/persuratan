@@ -34,10 +34,8 @@
                     <thead>
                         <tr>
                             <th>No Surat</th>
-                            <th>Nama Penerima</th>
                             <th>Tanggal Surat</th>
                             <th>Dokumen</th>
-                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -45,7 +43,6 @@
                         @foreach ($SuratKeluar as $row)
                         <tr>
                             <td>{{$row->no_surat}}</td>
-                            <td>{{$row->user->nama}}</td>
                             <td>{{$row->tgl_surat}}</td>
                             @if (Auth::user()->level == 'tu')
                                 <td>
@@ -70,18 +67,7 @@
                             @endif
                             
 
-                            <td>
-                                @if ($row->status_surat == 'pending')
-                                <div class="badge bg-warning">{{$row->status_surat}}</div>
-                                @endif
-                                @if ($row->status_surat == 'disetujui')
-                                <div class="badge bg-success">{{$row->status_surat}}</div>
-                                @endif
-                                @if ($row->status_surat == 'ditolak')
-                                <div class="badge bg-danger">{{$row->status_surat}}</div>
-                                @endif
-
-                            </td>
+                          
                             @if (Auth::user()->level == 'tu')
                             <td>
                                 <a href="{{route('detailSurat', $row->id)}}" class="btn icon btn-primary"><i
@@ -132,9 +118,15 @@
                             @endif
                             @if (Auth::user()->level == 'pimpinan')
                             <td>
-                                <a href="javascript:;" class="btn icon icon-left btn-primary" data-bs-toggle="modal"
+                                @if ($row->status_dispo == 'sudah')
+                                    <a href="javascript:;" class="btn icon icon-left btn-primary disabled" data-bs-toggle="modal"
+                                        data-bs-target="#hapus-data{{$row->id}}"><i class="bi bi-send-plus-fill"></i>
+                                        Disposisi</a>
+                                @else
+                                    <a href="javascript:;" class="btn icon icon-left btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#hapus-data{{$row->id}}"><i class="bi bi-send-plus-fill"></i>
                                     Disposisi</a>
+                                @endif
                                 {{-- modal disposisi --}}
                                 <div class="modal fade" id="hapus-data{{$row->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="hapus-data" aria-hidden="true">
@@ -166,20 +158,7 @@
                                                             <input type="text" value="{{$row->perihal}}"
                                                                 class="form-control" disabled>
                                                         </div>
-                                                        <label>Sifat: </label>
-                                                        <div class="form-group">
-                                                            <input type="text" name="sifat" placeholder="Masukan Sifat Surat"
-                                                                class="form-control">
-                                                        </div>
-                                                        <label>Penerima: </label>
-                                                        <div class="form-group">
-                                                            <select class="form-select" id="basicSelect" name="penerima_disposisi">
-                                                                    @foreach ($user as $item)
-                                                                        <option value="{{$item->id}}">{{$item->nama}}</option>
-                                                                    @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <label>Batas Disposisi: </label>
+                                                        <label>Tanggal: </label>
                                                         <div class="form-group">
                                                             <input type="date" id="date-dispo" class="form-control"
                                                             name="batas_waktu">

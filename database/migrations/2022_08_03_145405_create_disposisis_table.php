@@ -17,9 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_surat')->references('id')->on('surat_keluars')->onUpdate('cascade')->onDelete('cascade');
             $table->string('kode_disposisi');
-            $table->string('sifat');
             $table->date('batas_waktu');
-            $table->string('penerima_disposisi');
             $table->string('status_disposisi');
             $table->string('catatan');
             $table->timestamps();

@@ -29,7 +29,6 @@
                     <thead>
                         <tr>
                             <th>No Surat</th>
-                            <th>Nama Penerima</th>
                             <th>Tanggal Surat</th>
                             <th>Dokumen</th>
                             <th>Status</th>
@@ -41,7 +40,6 @@
                         @foreach ($detail as $row)
                             <tr>
                                 <td>{{$row->no_surat}}</td>
-                                <td>{{$row->user->nama}}</td>
                                 <td>{{$row->tgl_surat}}</td>
                                 <td>
                                     @if ($row->dokumen)

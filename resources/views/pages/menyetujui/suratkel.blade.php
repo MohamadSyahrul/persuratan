@@ -27,7 +27,6 @@
                         <strong>Success!</strong> {{ $message }}
                     </div>   
                 @endif
-                Data {{$pagename}}
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
@@ -69,13 +68,13 @@
                                         <i class="bi bi-file-check-fill"></i>Pilih
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonEmoji">
-                                        <a class="dropdown-item" href="disetujui/{{$row->id}}"><i class="bi bi-file-earmark-check-fill"></i>
+                                        <a class="dropdown-item" href="setujui/{{$row->id}}"><i class="bi bi-file-earmark-check-fill"></i>
                                             Setujui
                                         </a>
-                                        <a class="dropdown-item" href="ditunda/{{$row->id}}"><i class="bi bi-file-earmark-minus-fill"></i>
+                                        <a class="dropdown-item" href="proses/{{$row->id}}"><i class="bi bi-file-earmark-minus-fill"></i>
                                             Proses
                                         </a>
-                                        <a class="dropdown-item" href="ditolak/{{$row->id}}"><i class="bi bi-file-earmark-excel-fill"></i>
+                                        <a class="dropdown-item" href="arsipkan/{{$row->id}}"><i class="bi bi-file-earmark-excel-fill"></i>
                                             Arsipkan
                                         </a>
                                     </div>

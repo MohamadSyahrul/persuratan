@@ -15,20 +15,21 @@ class SuratController extends Controller
 {
     public function index(){
         $klasifikasi = Klasifikasi::all();
-        $user = User::where(function($query) {
-                        return $query->where('level','pimpinan')
-                        ->orWhere('level','admin');
-                    })
-                    ->get();
+        // $user = User::where(function($query) {
+        //                 return $query->where('level','pimpinan')
+        //                 ->orWhere('level','admin');
+        //             })
+        //             ->get();
                     // dd($user);
-        return view('pages.surat.suratbaru.createsurat', compact('user', 'klasifikasi'));
+        return view('pages.surat.suratbaru.createsurat', compact( 'klasifikasi'));
     }
 
     public function createBaru(Request $request)
     {
             $surat = $request->all();
-            $surat['no_surat'] = GenerateNomorSurat($request->tgl_surat, $request->sifat, $request->perihal);
             $surat['id_pembuat'] = Auth::user()->id;
+            $surat['surat'] = 'masuk';
+            
             if ($request->hasFile('dokumen')) {
                 $nama = $request->dokumen;
                 $namaFile = time() . rand(100, 999) . "." . $nama->getClientOriginalExtension();
@@ -39,13 +40,20 @@ class SuratController extends Controller
             }
             
             SuratKeluar::create($surat);
-            return redirect()->route('suratKeluar')->with('success', 'Surat berhasil dibuat !');
+
+            if (Auth::user()->level == 'admin') {
+                return redirect()->route('suratKeluarAdmin')->with('success', 'Surat berhasil dibuat !');
+            }
+            if (Auth::user()->level == 'tu') {
+                return redirect()->route('suratKeluarTU')->with('success', 'Surat berhasil dibuat !');
+            }
+            return back();
     }
 
     public function suratKeluar()
     {
             $pagename = "Surat Keluar";
-            $SuratKeluar = SuratKeluar::with('user')->get();
+            $SuratKeluar = SuratKeluar::where('surat', 'masuk')->get();
             return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename'));
     }
 
@@ -62,7 +70,6 @@ class SuratController extends Controller
     public function updateSurat(Request $request, $id){
         $surat = SuratKeluar::findOrFail($id);
         $row = $request->all();
-        $row['no_surat'] = GenerateNomorSurat($request->tgl_surat, $request->sifat, $request->perihal);
         $row['id_pembuat'] = Auth::user()->id;
             if ($request->hasFile('dokumen')) {
                 $nm = $request->dokumen;
@@ -92,7 +99,7 @@ class SuratController extends Controller
 
     public function detailSurat($id){
         $pagename = "Detail Surat";
-        $detail = SuratKeluar::with('user')->where('id', $id)->get();
+        $detail = SuratKeluar::where('id', $id)->get();
         
         return view('pages.surat.suratbaru.detailsurat',[
             'pagename'=> $pagename,
@@ -121,9 +128,9 @@ class SuratController extends Controller
             $pagename = "Surat Masuk";
             $user = User::all();
             // dd($user);
-            $SuratKeluar = SuratKeluar::where('id_penerima', Auth::user()->id)
-                                        ->where('status_surat', 'disetujui')
-                                        ->where('status_dispo', 'belum')
+            $SuratKeluar = SuratKeluar::where('status_surat', 'disetujui')
+                                        // ->where('status_dispo', 'belum')
+                                        // ->where('id_penerima', Auth::user()->id)
                                         ->get();
             return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename', 'user'));
     }
@@ -133,11 +140,45 @@ class SuratController extends Controller
             $pagename = "Surat Masuk";
             $user = User::all();
             $disposisi = Disposisi::with('surat','namapenerima')->get();
-            $suratmasuk = SuratKeluar::where('id_penerima', Auth::user()->id)
-                                        ->where('status_surat', 'disetujui')
+            $suratmasuk = SuratKeluar::where('status_surat', 'disetujui')
                                         ->where('status_dispo', 'belum')
+                                        // ->where('id_penerima', Auth::user()->id)
                                         ->get();
             // dd($suratmasuk);
             return view('pages.admin.suratmasuk', compact('suratmasuk', 'pagename', 'user', 'disposisi'));
+    }
+
+
+    public function suratKeluarPimpinan(){
+        $pagename = "Surat Keluar";
+        $klasifikasi = Klasifikasi::all();
+        $surat = SuratKeluar::with('pembuat')->get();
+        // dd($surat);
+        return view('pages.surat.surat', compact('surat','klasifikasi', 'pagename'));
+    }
+    public function createPimpinan(Request $request)
+    {
+            $surat = $request->all();
+            $surat['id_pembuat'] = Auth::user()->id;
+            $surat['surat'] = 'keluar';
+            
+            if ($request->hasFile('dokumen')) {
+                $nama = $request->dokumen;
+                $namaFile = time() . rand(100, 999) . "." . $nama->getClientOriginalExtension();
+                $surat['dokumen'] = $namaFile;
+                $nama->move(public_path() . '/dokumen', $namaFile);
+            }else{
+                $surat['dokumen'] = 'default.pdf';
+            }
+            
+            SuratKeluar::create($surat);
+
+            if (Auth::user()->level == 'admin') {
+                return redirect()->route('suratKeluarAdmin')->with('success', 'Surat berhasil dibuat !');
+            }
+            if (Auth::user()->level == 'tu') {
+                return redirect()->route('suratKeluarTU')->with('success', 'Surat berhasil dibuat !');
+            }
+            return back();
     }
 }

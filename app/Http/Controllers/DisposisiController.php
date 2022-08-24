@@ -29,10 +29,5 @@ class DisposisiController extends Controller
         return redirect()->route('suratMasukPimpinan')->with('success', 'Surat berhasil di disposisikan !');
     }
 
-    public function suratKeluardispo(){
-        $pagename = "Surat Keluar";
-        $surat = Disposisi::with(['namapenerima', 'surat'])->get();
-        // dd($surat);
-        return view('pages.surat.surat', compact('surat', 'pagename'));
-    }
+
 }
