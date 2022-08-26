@@ -53,7 +53,8 @@ Route::middleware(['auth'])->group(function () {
 
     // hak akses untuk admin
     Route::middleware('admin')->group(function() {
-        Route::get('/surat-masuk-admin', [SuratController::class, 'suratMasukAdmin'])->name('suratMasukAdmin');
+        Route::get('/surat-masuk-admin', [SuratController::class, 'suratMasuk'])->name('suratMasukAdmin');
+        
         Route::get('/input-surat', [SuratController::class, 'index'])->name('inputsurat');
         Route::resource('/managemen-anggota', ManagemenanggotaController::class);
 
@@ -71,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
     // hak akses untuk pimpinan
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');
-        Route::get('/surat-keluar-pimpinan', [SuratController::class, 'suratKeluarPimpinan']);
+        // Route::get('/surat-keluar-pimpinan', [SuratController::class, 'suratKeluarPimpinan']);
         Route::post('/disposisi-surat', [DisposisiController::class, 'disposisisurat'])->name('dispo');
         
         Route::get('/pimpinan/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadpimpinan');

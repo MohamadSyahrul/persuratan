@@ -28,7 +28,14 @@ class SuratController extends Controller
     {
             $surat = $request->all();
             $surat['id_pembuat'] = Auth::user()->id;
-            $surat['surat'] = 'masuk';
+
+            if (Auth::user()->level == 'admin') {
+                $surat['surat'] = 'masuk';
+            }
+            if (Auth::user()->level == 'tu') {
+                $surat['surat'] = 'keluar';
+            }
+            
             
             if ($request->hasFile('dokumen')) {
                 $nama = $request->dokumen;
@@ -53,8 +60,14 @@ class SuratController extends Controller
     public function suratKeluar()
     {
             $pagename = "Surat Keluar";
-            $SuratKeluar = SuratKeluar::where('surat', 'masuk')->get();
+            $SuratKeluar = SuratKeluar::where('surat', 'keluar')->get();
             return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename'));
+    }
+    public function suratMasuk()
+    {
+            $pagename = "Surat Masuk";
+            $Suratmasuk = SuratKeluar::where('surat', 'masuk')->get();
+            return view('pages.surat.suratmasuk', compact('Suratmasuk', 'pagename'));
     }
 
     public function editSurat($id){
@@ -160,7 +173,7 @@ class SuratController extends Controller
     {
             $surat = $request->all();
             $surat['id_pembuat'] = Auth::user()->id;
-            $surat['surat'] = 'keluar';
+            
             
             if ($request->hasFile('dokumen')) {
                 $nama = $request->dokumen;

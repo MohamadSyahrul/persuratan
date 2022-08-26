@@ -41,6 +41,39 @@
     </div>
     <div class="sidebar-menu">
         <ul class="menu">
+            <li class="sidebar-title">
+                <div class="avatar avatar-lm">
+                    @if (Auth::user()->level == 'tu')
+                        <img src="{{asset('assets/images/faces/5.jpg')}}" alt="faces">&nbsp;
+                        <span style="text-transform: capitalize;">
+                            {{Auth::user()->nama}}
+                        </span>
+                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    @endif
+                    @if (Auth::user()->level == 'admin')
+                        <img src="{{asset('assets/images/faces/3.jpg')}}" alt="faces">&nbsp;
+                        <span style="text-transform: capitalize;">
+                            {{Auth::user()->nama}}
+                        </span>
+                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    @endif
+                    @if (Auth::user()->level == 'kepalabiro')
+                        <img src="{{asset('assets/images/faces/6.jpg')}}" alt="faces">&nbsp;
+                        <span style="text-transform: capitalize;">
+                            {{Auth::user()->nama}}
+                        </span>
+                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    @endif
+                    @if (Auth::user()->level == 'pimpinan')
+                        <img src="{{asset('assets/images/faces/7.jpg')}}" alt="faces">&nbsp;
+                        <span style="text-transform: capitalize;">
+                            {{Auth::user()->nama}}
+                        </span>
+                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    @endif
+                </div>
+            </li>
+
             <li class="sidebar-title">Menu</li>
             <li class="sidebar-item {{ Request::is('dashboard') ? 'active' : '' }} ">
                 <a href="{{route('dashboard')}}" class='sidebar-link'>
@@ -77,19 +110,11 @@
             @endif
             @if (Auth::user()->level == 'pimpinan')
             
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item ">
+                    <a href="{{route('suratMasukPimpinan')}}" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
-                        <span>Managemen Surat</span>
+                        <span>Surat Masuk</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{route('suratMasukPimpinan')}}">Surat Masuk</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{url('surat-keluar-pimpinan')}}">Surat Keluar</a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="sidebar-item ">
                     <a href="{{route('disposisi')}}" class='sidebar-link'>

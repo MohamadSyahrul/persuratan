@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Surat ditolak</h6>
+                                            <h6 class="text-muted font-semibold">Surat diarsipkan</h6>
                                             <h6 class="font-extrabold mb-0">{{$tolak}}</h6>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Surat Pending</h6>
+                                            <h6 class="text-muted font-semibold">Surat diproses</h6>
                                             <h6 class="font-extrabold mb-0">{{$pending}}</h6>
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@
         new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
             data: {
-            labels: ["Disetujui", "Ditolak", "Pending"],
+            labels: ["Disetujui", "Diarsipkan", "Diproses"],
             datasets: [
                 {
                 label: "Surat",
