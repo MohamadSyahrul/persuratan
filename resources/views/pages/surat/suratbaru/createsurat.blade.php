@@ -8,13 +8,21 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Surat Baru</h3>
+                @if (Auth::user()->level == 'admin')
+                <h3>Surat Masuk</h3>
+                @else
+                <h3>Surat Keluar</h3>
+                @endif
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Surat Baru</li>
+                        @if (Auth::user()->level == 'admin')
+                        <li class="breadcrumb-item active" aria-current="page">Surat Masuk</li>
+                        @else
+                        <li class="breadcrumb-item active" aria-current="page">Surat Keluar</li>
+                        @endif
                     </ol>
                 </nav>
             </div>
@@ -25,7 +33,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Buat Surat Baru</h4>
+                    @if (Auth::user()->level == 'admin')
+                    <h4 class="card-title">Buat Surat Masuk</h4>
+                    @else
+                    <h4 class="card-title">Buat Surat Keluar</h4>
+                    @endif
                     </div>
                     <div class="card-content">
                         <div class="card-body">

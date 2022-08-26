@@ -177,13 +177,13 @@
                 <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
                     <a href="{{route('suratMasukAdmin')}}" class='sidebar-link'>
                         <i class="bi bi-file-arrow-up-fill"></i>
-                        <span>Surat Masuk</span>
+                        <span>Data Surat Masuk</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
                     <a href="{{route('suratKeluarAdmin')}}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-arrow-down-fill"></i>
-                        <span>Surat Keluar</span>
+                        <span>Data Surat Keluar</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('managemen-anggota') ? 'active' : '' }}">
