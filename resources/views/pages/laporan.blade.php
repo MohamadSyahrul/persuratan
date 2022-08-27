@@ -3,8 +3,8 @@
 {{-- <link rel="stylesheet" href="{{asset('assets/css/pages/datatables.css')}}"> --}}
 <link rel="stylesheet" href="{{asset('assets/css/pages/fontawesome.css')}}">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-{{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css"> --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css">
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css"> --}}
 @endpush
 @section('content')
 <div class="page-heading">

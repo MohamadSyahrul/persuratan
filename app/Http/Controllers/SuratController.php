@@ -49,7 +49,7 @@ class SuratController extends Controller
             SuratKeluar::create($surat);
 
             if (Auth::user()->level == 'admin') {
-                return redirect()->route('suratKeluarAdmin')->with('success', 'Surat berhasil dibuat !');
+                return redirect()->route('suratMasukAdmin')->with('success', 'Surat berhasil dibuat !');
             }
             if (Auth::user()->level == 'tu') {
                 return redirect()->route('suratKeluarTU')->with('success', 'Surat berhasil dibuat !');
@@ -142,7 +142,7 @@ class SuratController extends Controller
             $user = User::all();
             // dd($user);
             $SuratKeluar = SuratKeluar::where('status_surat', 'disetujui')
-                                        // ->where('status_dispo', 'belum')
+                                        ->where('surat', 'masuk')
                                         // ->where('id_penerima', Auth::user()->id)
                                         ->get();
             return view('pages.surat.suratKeluar', compact('SuratKeluar', 'pagename', 'user'));
@@ -193,5 +193,12 @@ class SuratController extends Controller
                 return redirect()->route('suratKeluarTU')->with('success', 'Surat berhasil dibuat !');
             }
             return back();
+    }
+    
+    public function suratKeluarAdmin()
+    {
+            $pagename = "Surat Keluar";
+            $SuratKeluar = SuratKeluar::where('surat', 'keluar')->where('status_surat', 'disetujui')->get();
+            return view('pages.admin.suratkeluar', compact('SuratKeluar', 'pagename'));
     }
 }

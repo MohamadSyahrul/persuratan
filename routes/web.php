@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/input-surat', [SuratController::class, 'index'])->name('inputsurat');
         Route::resource('/managemen-anggota', ManagemenanggotaController::class);
 
-        Route::get('/admin/surat-keluar', [SuratController::class, 'suratKeluar'])->name('suratKeluarAdmin');
+        Route::get('/admin/surat-keluar', [SuratController::class, 'suratKeluarAdmin'])->name('suratKeluarAdmin');
 
         Route::get('/admin/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadadmin');
 
