@@ -63,6 +63,7 @@
                                     <div class="col-md-12 form-group">
                                         <input type="text" id="text-id" class="form-control" name="nama_klasifikasi"
                                             placeholder="Masukan Nama Klasifikasi" required>
+
                                     </div>
 
                                 </div>

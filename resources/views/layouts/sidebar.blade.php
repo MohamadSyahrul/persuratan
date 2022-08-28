@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item ">
-                    <a href="{{route('disposisi')}}" class='sidebar-link'>
+                    <a href="{{route('disposisiAll')}}" class='sidebar-link'>
                         <i class="bi bi-chat-left-dots-fill"></i>
                         <span>Disposisi</span>
                     </a>
