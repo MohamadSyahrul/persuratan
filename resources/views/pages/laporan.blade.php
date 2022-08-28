@@ -32,15 +32,33 @@
             </div>
             <div class="card-body">
                 <table cellspacing="5" cellpadding="5" border="0">
-                    <tbody><tr>
-                        <td>Dari Tanggal:</td>
-                        <td><input type="text" id="min" name="min"></td>
-                    </tr>
-                    <tr>
-                        <td>Sampai Tanggal:</td>
-                        <td><input type="text" id="max" name="max"></td>
-                    </tr>
-                    </tbody>
+                    <form action="{{route('filterlaporan')}}" method="POST">
+                        @csrf
+                        <div class="row g-3 ">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="dari" id="surat" required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="sampai" id="surat" required></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <select class="form-control" id="jenis-kelamin" name="status">
+                                        <option value="masuk">Masuk</option>
+                                        <option value="keluar">Keluar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button type="submit" class="btn bg-primary text-white">Filter</button>
+                                </div>
+                            </div>
+                        <div>
+                    </form>
                 </table>
                 <table id="example" class="table display" style="width:100%">
                     <thead>
@@ -59,14 +77,14 @@
                             <td>{{$item->tgl_surat}}</td>
                             <td>
                                 @if (Auth::user()->level == 'kepalabiro')
-                                    <a href="{{route('downloadkepalabiro', $item->dokumen)}}">
-                                        {{$item->dokumen}}
-                                    </a>                                    
+                                <a href="{{route('downloadkepalabiro', $item->dokumen)}}">
+                                    {{$item->dokumen}}
+                                </a>
                                 @endif
                                 @if (Auth::user()->level == 'pimpinan')
-                                    <a href="{{route('downloadpimpinan', $item->dokumen)}}">
-                                        {{$item->dokumen}}
-                                    </a>                                    
+                                <a href="{{route('downloadpimpinan', $item->dokumen)}}">
+                                    {{$item->dokumen}}
+                                </a>
                                 @endif
                             </td>
                         </tr>
@@ -86,46 +104,60 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
 <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+{{-- <script>
+    $(document).ready(function () {
+
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script> --}}
 
 <script>
     var minDate, maxDate;
- 
- // Custom filtering function which will search data in column four between two values
- $.fn.dataTable.ext.search.push(
-     function( settings, data, dataIndex ) {
-         var min = minDate.val();
-         var max = maxDate.val();
-         var date = new Date( data[4] );
-  
-         if (
-             ( min === null && max === null ) ||
-             ( min === null && date <= max ) ||
-             ( min <= date   && max === null ) ||
-             ( min <= date   && date <= max )
-         ) {
-             return true;
-         }
-         return false;
-     }
- );
-  
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#min'), {
-         format: 'YYYY-MM-DD'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'YYYY-MM-DD'
-     });
-  
-     // DataTables initialisation
-     var table = $('#example').DataTable();
-  
-     // Refilter the table
-     $('#min, #max').on('change', function () {
-         table.draw();
-     });
- });
+
+    // Custom filtering function which will search data in column four between two values
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var date = new Date(data[4]);
+
+            if (
+                (min === null && max === null) ||
+                (min === null && date <= max) ||
+                (min <= date && max === null) ||
+                (min <= date && date <= max)
+            ) {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    $(document).ready(function () {
+        // Create date inputs
+        minDate = new DateTime($('#min'), {
+            format: 'YYYY-MM-DD'
+        });
+        maxDate = new DateTime($('#max'), {
+            format: 'YYYY-MM-DD'
+        });
+
+        // DataTables initialisation
+        var table = $('#example').DataTable();
+
+        // Refilter the table
+        $('#min, #max').on('change', function () {
+            table.draw();
+        });
+    });
+
 </script>
 
 @endpush

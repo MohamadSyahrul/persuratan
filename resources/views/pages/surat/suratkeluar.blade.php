@@ -158,16 +158,27 @@
                                                             <input type="text" value="{{$row->perihal}}"
                                                                 class="form-control" disabled>
                                                         </div>
+                                                        <label>Penerima Disposi</label>
+                                                        <select class="form-select" id="basicSelect" name="id_user">
+                                                            <option>Pilih Penerima...</option>
+                                                            @foreach (App\Models\User::where(function($query) {
+                                                                                return $query->where('level','kepalabiro')
+                                                                                ->orWhere('level','tu');
+                                                                            })
+                                                                            ->get() as $item)
+                                                            <option value="{{$item->id}}">{{$item->nama}} ({{$item->level}})</option>                                                                
+                                                            @endforeach
+                                                        </select>
                                                         <label>Tanggal: </label>
                                                         <div class="form-group">
                                                             <input type="date" id="date-dispo" class="form-control"
                                                             name="batas_waktu">
                                                         </div>
-                                                        <label>Status Disposisi: </label>
+                                                        {{-- <label>Status Disposisi: </label>
                                                         <div class="form-group">
                                                             <input type="text" name="status_disposisi" placeholder="Masukan Status Disposisi"
                                                                 class="form-control">
-                                                        </div>
+                                                        </div> --}}
                                                         <label>Catatan: </label>
                                                         <div class="form-group">
                                                             <input type="text" name="catatan" placeholder="Masukan Catatan"

@@ -35,8 +35,6 @@
                         <tr>
                             <th>No Surat</th>
                             <th>Kode Disposisi</th>
-                            <th>Tanggal</th>
-                            <th>Catatan</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -45,22 +43,16 @@
                             <tr>
                                 <td>{{$item->surat->no_surat}}</td>
                                 <td>{{$item->kode_disposisi}}</td>
-                                <td>{{$item->batas_waktu}}</td>
-                                <td>{{$item->catatan}}</td>
                                 <td>
                                     @if ($item->status_disposisi === 'selesai')
-                                        <a href="ubahstatus-proses/{{$item->id}}">
-                                            <span class="badge bg-success">
-                                                {{$item->status_disposisi}}
-                                            </span>
-                                        </a>
+                                        <span class="badge bg-success">
+                                            {{$item->status_disposisi}}
+                                        </span>
                                     @endif
                                     @if ($item->status_disposisi === 'proses')
-                                        <a href="ubahstatus-selesai/{{$item->id}}">
-                                            <span class="badge bg-warning">
-                                                {{$item->status_disposisi}}
-                                            </span>
-                                        </a>
+                                        <span class="badge bg-warning">
+                                            {{$item->status_disposisi}}
+                                        </span>
                                     @endif
                                 </td>
                             </tr>

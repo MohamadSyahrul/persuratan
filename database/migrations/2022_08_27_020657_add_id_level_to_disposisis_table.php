@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('disposisis', function (Blueprint $table) {
 
-            $table->foreign('id_level')->references('id')->on('surat_keluars')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

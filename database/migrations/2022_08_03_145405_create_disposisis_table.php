@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('batas_waktu');
             $table->string('status_disposisi');
             $table->string('catatan');
-            $table->unsignedBigInteger('id_level');
+            $table->unsignedBigInteger('id_user');
             $table->timestamps();
         });
     }

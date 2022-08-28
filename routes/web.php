@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('laporan-surat-masuk', [LaporanController::class, 'laporansm'])->name('laporansuratmasuk');
 
+        Route::get('admin/disposisi', [DisposisiController::class, 'disposisiadmin'])->name('disposisiadmin');
+
     });
     
     Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
@@ -78,6 +80,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pimpinan/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadpimpinan');
         
         Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
+        Route::post('filter-laporan', [LaporanController::class, 'filter'])->name('filterlaporan');
+
 
         Route::get('pimpinan/arsip-surat', [ArsipController::class, 'arsip'])->name('arsipPimpinan');
 
@@ -86,6 +90,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/klasifikasi', KlasifikasiController::class);
     Route::post('/create-surat', [SuratController::class, 'createBaru'])->name('createBaru');
     Route::Post('/surat-keluar', [SuratController::class, 'createPimpinan'])->name('createPimpinan');
+
+    Route::get('ubahstatus-selesai/{id}', [DisposisiController::class, 'ubahStatusSelesai']);
+    Route::get('ubahstatus-proses/{id}', [DisposisiController::class, 'ubahStatusProses']);
 
     // hak akses untuk tu
     Route::middleware('tu')->group(function() {
