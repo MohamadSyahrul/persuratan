@@ -47,35 +47,35 @@
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="no_surat-label">No Surat</label>
-                                                <input type="text" id="no_surat-label" class="form-control"
+                                                <input type="text" id="no_surat-label" class="form-control" required
                                                     placeholder="Masukan No Surat" name="no_surat">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="perihal-label">Perihal</label>
-                                                <input type="text" id="perihal-label" class="form-control"
+                                                <input type="text" id="perihal-label" class="form-control" required
                                                     placeholder="Masukan Perihal dari Surat" name="perihal">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="masukan-sifat">Sifat Surat</label>
-                                                <input type="text" id="company-column" class="form-control"
+                                                <input type="text" id="company-column" class="form-control" required
                                                     name="sifat" placeholder="Masukan sifat surat">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="masukan-sifat">Asal Surat</label>
-                                                <input type="text" id="company-column" class="form-control"
+                                                <input type="text" id="company-column" class="form-control" required
                                                     name="asal_surat" placeholder="Masukan asal surat">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="date-surat">Tanggal Surat</label>
-                                                <input type="date" id="date-surat" class="form-control"
+                                                <input type="date" id="date-surat" class="form-control" required
                                                     name="tgl_surat">
                                             </div>
                                         </div>

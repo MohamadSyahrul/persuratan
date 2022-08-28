@@ -55,14 +55,14 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <input type="text" id="first-name" class="form-control" name="kode_klasifikasi"
-                                            placeholder="Masukan Kode Klasifikasi">
+                                            placeholder="Masukan Kode Klasifikasi" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Nama Klasifikasi</label>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <input type="text" id="text-id" class="form-control" name="nama_klasifikasi"
-                                            placeholder="Masukan Nama Klasifikasi">
+                                            placeholder="Masukan Nama Klasifikasi" required>
                                     </div>
 
                                 </div>
@@ -122,7 +122,7 @@
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <input type="text" id="first-name" class="form-control"
-                                                            name="kode_klasifikasi"
+                                                            name="kode_klasifikasi" required
                                                             placeholder="Masukan Kode Klasifikasi"
                                                             value="{{$row->kode_klasifikasi}}">
                                                     </div>
@@ -131,7 +131,7 @@
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <input type="text" id="text-id" class="form-control"
-                                                            name="nama_klasifikasi"
+                                                            name="nama_klasifikasi" required
                                                             placeholder="Masukan Nama Klasifikasi"
                                                             value="{{$row->nama_klasifikasi}}">
                                                     </div>
