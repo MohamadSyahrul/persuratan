@@ -71,6 +71,8 @@ Route::middleware(['auth'])->group(function () {
     });
     
     Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
+    Route::get('/disposisi-all', [DisposisiController::class, 'indexAll'])->name('disposisiAll');
+
     // hak akses untuk pimpinan
     Route::middleware('pimpinan')->group(function() {
         Route::get('/surat-masuk-pimpinan', [SuratController::class, 'suratMasukPimpinan'])->name('suratMasukPimpinan');

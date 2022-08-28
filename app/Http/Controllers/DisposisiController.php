@@ -20,6 +20,12 @@ class DisposisiController extends Controller
         $disposisi = Disposisi::with(['namapenerima', 'surat'])->where('id_user', Auth::user()->id)->get();
         return view('pages.disposisi', compact('disposisi', 'pagename'));
     }
+    public function indexAll()
+    {
+        $pagename = "Disposisi";
+        $disposisi = Disposisi::with(['namapenerima', 'surat'])->get();
+        return view('pages.disposisiall', compact('disposisi', 'pagename'));
+    }
 
     public function disposisisurat(Request $request){
         $dispo = $request->all();

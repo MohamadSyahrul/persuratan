@@ -61,7 +61,7 @@
                                         <label>Nama Klasifikasi</label>
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <input type="text" id="text-id" class="form-control" name="nama_klasifikasi"
+                                        <input type="text" id="text-id" class="form-control" name="nama_klasifikasi" required
                                             placeholder="Masukan Nama Klasifikasi">
                                     </div>
 
@@ -131,7 +131,7 @@
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <input type="text" id="text-id" class="form-control"
-                                                            name="nama_klasifikasi"
+                                                            name="nama_klasifikasi" required
                                                             placeholder="Masukan Nama Klasifikasi"
                                                             value="{{$row->nama_klasifikasi}}">
                                                     </div>
