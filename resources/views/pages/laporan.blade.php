@@ -50,14 +50,15 @@
                                 <div class="form-group">
                                     <input type="date" class="form-control" name="end_date" id="surat" required></div>
                             </div>
-                            {{-- <div class="col-md-2">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <select class="form-control" id="jenis-kelamin" name="status">
+                                    <select class="form-control" id="statu" name="status">
+                                        <option>Pilih..</option>
                                         <option value="masuk">Masuk</option>
                                         <option value="keluar">Keluar</option>
                                     </select>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <button type="submit" class="btn bg-primary text-white">Filter</button>

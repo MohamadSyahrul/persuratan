@@ -25,7 +25,7 @@ class LaporanController extends Controller
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
             $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
-            $data = SuratKeluar::whereBetween('tgl_surat',[$start_date,$end_date])->get();
+            $data = SuratKeluar::where('surat', request()->status)->whereBetween('tgl_surat',[$start_date,$end_date])->get();
         } else {
             $data = SuratKeluar::latest()->get();
         }

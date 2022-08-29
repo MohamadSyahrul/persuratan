@@ -45,29 +45,29 @@
                             <td>{{$row->no_surat}}</td>
                             <td>{{$row->tgl_surat}}</td>
                             @if (Auth::user()->level == 'tu')
-                                <td>
-                                    <a href="{{route('downloadDokumen', $row->dokumen)}}">
-                                        {{$row->dokumen ?? 'dokumen'}}
-                                    </a>
-                                </td>
+                            <td>
+                                <a href="{{route('downloadDokumen', $row->dokumen)}}">
+                                    {{$row->dokumen ?? 'dokumen'}}
+                                </a>
+                            </td>
                             @endif
                             @if (Auth::user()->level == 'pimpinan')
-                                <td>
-                                    <a href="{{route('downloadpimpinan', $row->dokumen)}}">
-                                        {{$row->dokumen ?? 'dokumen'}}
-                                    </a>
-                                </td>
+                            <td>
+                                <a href="{{route('downloadpimpinan', $row->dokumen)}}">
+                                    {{$row->dokumen ?? 'dokumen'}}
+                                </a>
+                            </td>
                             @endif
                             @if (Auth::user()->level == 'admin')
-                                <td>
-                                    <a href="{{route('downloadadmin', $row->dokumen)}}">
-                                        {{$row->dokumen ?? 'dokumen'}}
-                                    </a>
-                                </td>
+                            <td>
+                                <a href="{{route('downloadadmin', $row->dokumen)}}">
+                                    {{$row->dokumen ?? 'dokumen'}}
+                                </a>
+                            </td>
                             @endif
-                            
 
-                          
+
+
                             @if (Auth::user()->level == 'tu')
                             <td>
                                 <a href="{{route('detailSurat', $row->id)}}" class="btn icon btn-primary"><i
@@ -119,11 +119,12 @@
                             @if (Auth::user()->level == 'pimpinan')
                             <td>
                                 @if ($row->status_dispo == 'sudah')
-                                    <a href="javascript:;" class="btn icon icon-left btn-primary disabled" data-bs-toggle="modal"
-                                        data-bs-target="#hapus-data{{$row->id}}"><i class="bi bi-send-plus-fill"></i>
-                                        Disposisi</a>
+                                <a href="javascript:;" class="btn icon icon-left btn-primary disabled"
+                                    data-bs-toggle="modal" data-bs-target="#hapus-data{{$row->id}}"><i
+                                        class="bi bi-send-plus-fill"></i>
+                                    Disposisi</a>
                                 @else
-                                    <a href="javascript:;" class="btn icon icon-left btn-primary" data-bs-toggle="modal"
+                                <a href="javascript:;" class="btn icon icon-left btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#hapus-data{{$row->id}}"><i class="bi bi-send-plus-fill"></i>
                                     Disposisi</a>
                                 @endif
@@ -162,17 +163,18 @@
                                                         <select class="form-select" id="basicSelect" name="id_user">
                                                             <option>Pilih Penerima...</option>
                                                             @foreach (App\Models\User::where(function($query) {
-                                                                                return $query->where('level','kepalabiro')
-                                                                                ->orWhere('level','tu');
-                                                                            })
-                                                                            ->get() as $item)
-                                                            <option value="{{$item->id}}">{{$item->nama}} ({{$item->level}})</option>                                                                
+                                                            return $query->where('level','kepalabiro')
+                                                            ->orWhere('level','tu');
+                                                            })
+                                                            ->get() as $item)
+                                                            <option value="{{$item->id}}">{{$item->nama}}
+                                                                ({{$item->level}})</option>
                                                             @endforeach
                                                         </select>
                                                         <label>Tanggal: </label>
                                                         <div class="form-group">
                                                             <input type="date" id="date-dispo" class="form-control"
-                                                            name="batas_waktu">
+                                                                name="batas_waktu">
                                                         </div>
                                                         {{-- <label>Status Disposisi: </label>
                                                         <div class="form-group">
@@ -181,9 +183,9 @@
                                                         </div> --}}
                                                         <label>Catatan: </label>
                                                         <div class="form-group">
-                                                            <input type="text" name="catatan" placeholder="Masukan Catatan"
-                                                                class="form-control">
-                                                        </div>                                                        
+                                                            <input type="text" name="catatan"
+                                                                placeholder="Masukan Catatan" class="form-control">
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-light-secondary"
@@ -207,7 +209,7 @@
                             @endif
                             @if (Auth::user()->level == 'admin')
                             <td>
-                                Only TU
+                                Tidak ada aksi
                             </td>
                             @endif
                         </tr>

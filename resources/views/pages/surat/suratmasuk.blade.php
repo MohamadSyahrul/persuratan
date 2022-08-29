@@ -196,7 +196,7 @@
                             @endif
                             @if (Auth::user()->level == 'admin')
                             <td>
-                                Only TU
+                                Tidak ada aksi
                             </td>
                             @endif
                         </tr>
