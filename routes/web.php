@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\ArsipController;
-use App\Http\Controllers\DisposisiController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KlasifikasiController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\ManagemenanggotaController;
-use App\Http\Controllers\MenyetujuisuratController;
-use App\Http\Controllers\SuratController;
+use App\Models\User;
+use App\Models\Disposisi;
 use App\Models\SuratKeluar;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\MenyetujuisuratController;
+use App\Http\Controllers\ManagemenanggotaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +40,18 @@ Route::middleware(['auth'])->group(function () {
         $tolak = SuratKeluar::where('status_surat', 'ditolak')->count();
         $total = SuratKeluar::count();
         $pending = SuratKeluar::where('status_surat', 'pending')->count();
-
+        // $level = User::where('level', 'kepalabiro')->first();
+        // dd($level);
+        $notif = Disposisi::count();
+        $disposisi = Disposisi::select('kode_disposisi', 'catatan')->get();
+        // dd($disposisi);
         return view('index', [
             'setuju' => $setuju,
             'tolak' => $tolak,
             'total' => $total,
-            'pending' => $pending
+            'pending' => $pending,
+            'notif' => $notif,
+            'disposisi' => $disposisi
         ]);
     })->name('dashboard');
 

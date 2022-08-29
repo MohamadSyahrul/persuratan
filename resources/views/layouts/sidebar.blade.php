@@ -44,32 +44,32 @@
             <li class="sidebar-title">
                 <div class="avatar avatar-lm">
                     @if (Auth::user()->level == 'tu')
-                        <img src="{{asset('assets/images/faces/5.jpg')}}" alt="faces">&nbsp;
-                        <span style="text-transform: capitalize;">
-                            {{Auth::user()->nama}}
-                        </span>
-                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    <img src="{{asset('assets/images/faces/5.jpg')}}" alt="faces">&nbsp;
+                    <span style="text-transform: capitalize;">
+                        {{Auth::user()->nama}}
+                    </span>
+                    <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
                     @endif
                     @if (Auth::user()->level == 'admin')
-                        <img src="{{asset('assets/images/faces/3.jpg')}}" alt="faces">&nbsp;
-                        <span style="text-transform: capitalize;">
-                            {{Auth::user()->nama}}
-                        </span>
-                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    <img src="{{asset('assets/images/faces/3.jpg')}}" alt="faces">&nbsp;
+                    <span style="text-transform: capitalize;">
+                        {{Auth::user()->nama}}
+                    </span>
+                    <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
                     @endif
                     @if (Auth::user()->level == 'kepalabiro')
-                        <img src="{{asset('assets/images/faces/6.jpg')}}" alt="faces">&nbsp;
-                        <span style="text-transform: capitalize;">
-                            {{Auth::user()->nama}}
-                        </span>
-                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    <img src="{{asset('assets/images/faces/6.jpg')}}" alt="faces">&nbsp;
+                    <span style="text-transform: capitalize;">
+                        {{Auth::user()->nama}}
+                    </span>
+                    <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
                     @endif
                     @if (Auth::user()->level == 'pimpinan')
-                        <img src="{{asset('assets/images/faces/7.jpg')}}" alt="faces">&nbsp;
-                        <span style="text-transform: capitalize;">
-                            {{Auth::user()->nama}}
-                        </span>
-                        <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
+                    <img src="{{asset('assets/images/faces/7.jpg')}}" alt="faces">&nbsp;
+                    <span style="text-transform: capitalize;">
+                        {{Auth::user()->nama}}
+                    </span>
+                    <p>&nbsp;&nbsp;({{Auth::user()->level}})</p>
                     @endif
                 </div>
             </li>
@@ -83,146 +83,146 @@
             </li>
 
             @if (Auth::user()->level == 'tu')
-                <li class="sidebar-item {{ Request::is('surat-baru') ? 'active' : '' }}">
-                    <a href="{{url('surat-baru')}}" class='sidebar-link'>
-                        <i class="bi bi-journal-bookmark-fill"></i>
-                        <span>Surat Baru</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
-                    <a href="{{route('suratKeluarTU')}}" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-arrow-down-fill"></i>
-                        <span>Surat Keluar</span>
-                    </a>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('disposisi')}}" class='sidebar-link'>
-                        <i class="bi bi-chat-left-dots-fill"></i>
-                        <span>Disposisi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
-                    <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
-                        <i class="bi bi-layers-fill"></i>
-                        <span>Klasifikasi Surat</span>
-                    </a>
-                </li>
+            <li class="sidebar-item {{ Request::is('surat-baru') ? 'active' : '' }}">
+                <a href="{{url('surat-baru')}}" class='sidebar-link'>
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Surat Baru</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
+                <a href="{{route('suratKeluarTU')}}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                    <span>Surat Keluar</span>
+                </a>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('disposisi')}}" class='sidebar-link'>
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                    <span>Disposisi</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
+                <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
+                    <i class="bi bi-layers-fill"></i>
+                    <span>Klasifikasi Surat</span>
+                </a>
+            </li>
+           
             @endif
             @if (Auth::user()->level == 'pimpinan')
-            
-                <li class="sidebar-item ">
-                    <a href="{{route('suratMasukPimpinan')}}" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Surat Masuk</span>
-                    </a>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('disposisiAll')}}" class='sidebar-link'>
-                        <i class="bi bi-chat-left-dots-fill"></i>
-                        <span>Disposisi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('laporan')}}" class='sidebar-link'>
-                        <i class="bi bi-archive-fill"></i>
-                        <span>Laporan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('arsip') ? 'active' : '' }}">
-                    <a href="{{route('arsipPimpinan')}}" class='sidebar-link'>
-                        <i class="bi bi-file-post-fill"></i>
-                        <span>Arsip Surat</span>
-                    </a>
-                </li>
+
+            <li class="sidebar-item ">
+                <a href="{{route('suratMasukPimpinan')}}" class='sidebar-link'>
+                    <i class="bi bi-collection-fill"></i>
+                    <span>Surat Masuk</span>
+                </a>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('disposisiAll')}}" class='sidebar-link'>
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                    <span>Disposisi</span>
+                </a>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('laporan')}}" class='sidebar-link'>
+                    <i class="bi bi-archive-fill"></i>
+                    <span>Laporan</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('arsip') ? 'active' : '' }}">
+                <a href="{{route('arsipPimpinan')}}" class='sidebar-link'>
+                    <i class="bi bi-file-post-fill"></i>
+                    <span>Arsip Surat</span>
+                </a>
+            </li>
             @endif
             @if (Auth::user()->level == 'kepalabiro')
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-file-text-fill"></i>
-                        <span>Data Surat</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{route('menyetujuiSurat')}}">Surat Masuk</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{route('menyetujuiSuratKeluar')}}">Surat Keluar</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('disposisi')}}" class='sidebar-link'>
-                        <i class="bi bi-chat-left-dots-fill"></i>
-                        <span>Disposisi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('laporankepalabiro')}}" class='sidebar-link'>
-                        <i class="bi bi-archive-fill"></i>
-                        <span>Laporan</span>
-                    </a>
-                </li>
+            <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-file-text-fill"></i>
+                    <span>Data Surat</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a href="{{route('menyetujuiSurat')}}">Surat Masuk</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="{{route('menyetujuiSuratKeluar')}}">Surat Keluar</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('disposisi')}}" class='sidebar-link'>
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                    <span>Disposisi</span>
+                </a>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('laporankepalabiro')}}" class='sidebar-link'>
+                    <i class="bi bi-archive-fill"></i>
+                    <span>Laporan</span>
+                </a>
+            </li>
             @endif
 
-            
+
 
 
             @if (Auth::user()->level == 'admin')
-                <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
-                    <a href="{{route('inputsurat')}}" class='sidebar-link'>
-                        <i class="bi bi-journal-bookmark-fill"></i>
-                        <span>Input Surat</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
-                    <a href="{{route('suratMasukAdmin')}}" class='sidebar-link'>
-                        <i class="bi bi-file-arrow-up-fill"></i>
-                        <span>Data Surat Masuk</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
-                    <a href="{{route('suratKeluarAdmin')}}" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-arrow-down-fill"></i>
-                        <span>Data Surat Keluar</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('managemen-anggota') ? 'active' : '' }}">
-                    <a href="{{route('managemen-anggota.index')}}" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Managemen User</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
-                    <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
-                        <i class="bi bi-layers-fill"></i>
-                        <span>Klasifikasi Surat</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('arsip') ? 'active' : '' }}">
-                    <a href="{{route('arsipAdmin')}}" class='sidebar-link'>
-                        <i class="bi bi-file-post-fill"></i>
-                        <span>Arsip Surat</span>
-                    </a>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('disposisiadmin')}}" class='sidebar-link'>
-                        <i class="bi bi-chat-left-dots-fill"></i>
-                        <span>Disposisi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item ">
-                    <a href="{{route('laporansuratmasuk')}}" class='sidebar-link'>
-                        <i class="bi bi-folder-symlink-fill"></i>
-                        <span>Laporan Surat Masuk</span>
-                    </a>
-                </li>
+            <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
+                <a href="{{route('inputsurat')}}" class='sidebar-link'>
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Input Surat</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('suratMasukAdmin') ? 'active' : '' }}">
+                <a href="{{route('suratMasukAdmin')}}" class='sidebar-link'>
+                    <i class="bi bi-file-arrow-up-fill"></i>
+                    <span>Data Surat Masuk</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('surat-keluar') ? 'active' : '' }}">
+                <a href="{{route('suratKeluarAdmin')}}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                    <span>Data Surat Keluar</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('managemen-anggota') ? 'active' : '' }}">
+                <a href="{{route('managemen-anggota.index')}}" class='sidebar-link'>
+                    <i class="bi bi-person-badge-fill"></i>
+                    <span>Managemen User</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('klasifikasi') ? 'active' : '' }}">
+                <a href="{{route('klasifikasi.index')}}" class='sidebar-link'>
+                    <i class="bi bi-layers-fill"></i>
+                    <span>Klasifikasi Surat</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ Request::is('arsip') ? 'active' : '' }}">
+                <a href="{{route('arsipAdmin')}}" class='sidebar-link'>
+                    <i class="bi bi-file-post-fill"></i>
+                    <span>Arsip Surat</span>
+                </a>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('disposisiadmin')}}" class='sidebar-link'>
+                    <i class="bi bi-chat-left-dots-fill"></i>
+                    <span>Disposisi</span>
+                </a>
+            </li>
+            <li class="sidebar-item ">
+                <a href="{{route('laporansuratmasuk')}}" class='sidebar-link'>
+                    <i class="bi bi-folder-symlink-fill"></i>
+                    <span>Laporan Surat Masuk</span>
+                </a>
+            </li>
             @endif
 
             <li class="sidebar-item">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <a href="{{ route('logout') }}" class='sidebar-link' 
-                        onclick="event.preventDefault();
+                    <a href="{{ route('logout') }}" class='sidebar-link' onclick="event.preventDefault();
                         this.closest('form').submit();">
                         <i class="bi bi-door-open-fill"></i>
                         <span>Logout</span>
