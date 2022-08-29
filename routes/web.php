@@ -90,7 +90,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pimpinan/download-dokumen/{dokumen}', [SuratController::class, 'downloadDokumen'])->name('downloadpimpinan');
         
         Route::get('laporan', [LaporanController::class, 'index'])->name('laporan');
-        Route::post('filter-laporan', [LaporanController::class, 'filter'])->name('filterlaporan');
+        // Route::get('filter-laporan', function () {
+        //     if (request()->start_date || request()->end_date) {
+        //         $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+        //         $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+        //         $data = App\Models\SuratKeluar::whereBetween('tgl_surat',[$start_date,$end_date])->get();
+        //     } else {
+        //         $data = App\Models\SuratKeluar::latest()->get();
+        //     }
+            
+        //     return view('pages.laporan', compact('data'));
+        // })->name('filterlaporan');
 
 
         Route::get('pimpinan/arsip-surat', [ArsipController::class, 'arsip'])->name('arsipPimpinan');

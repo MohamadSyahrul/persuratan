@@ -29,17 +29,24 @@
             <div class="card-header">
             </div>
             <div class="card-body">
-                <table cellspacing="5" cellpadding="5" border="0">
-                    <tbody><tr>
-                        <td>Dari Tanggal:</td>
-                        <td><input type="text" id="min" name="min"></td>
-                    </tr>
-                    <tr>
-                        <td>Sampai Tanggal:</td>
-                        <td><input type="text" id="max" name="max"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <form action="{{route('laporansuratmasuk')}}" method="GET">
+                    <div class="row g-3 ">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="start_date" id="surat" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="end_date" id="surat" required></div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button type="submit" class="btn bg-primary text-white">Filter</button>
+                            </div>
+                        </div>
+                    <div>
+                </form>
                 <table class="table display" style="width:100%" id="example">
                     <thead>
                         <tr>
@@ -58,18 +65,18 @@
                             <td>{{$item->perihal}}</td>
                             @if (Auth::user()->level == 'kepalabiro')
                             <td>
-                                    <a href="{{route('downloadkepalabiro', $item->dokumen)}}">
-                                        {{$item->dokumen}}
-                                    </a>                                    
-                                </td>
-                                @endif
-                                @if (Auth::user()->level == 'pimpinan')
-                                <td>
-                                    <a href="{{route('downloadpimpinan', $item->dokumen)}}">
-                                        {{$item->dokumen}}
-                                    </a>                                    
-                                </td>
-                                @endif
+                                <a href="{{route('downloadkepalabiro', $item->dokumen)}}">
+                                    {{$item->dokumen}}
+                                </a>
+                            </td>
+                            @endif
+                            @if (Auth::user()->level == 'pimpinan')
+                            <td>
+                                <a href="{{route('downloadpimpinan', $item->dokumen)}}">
+                                    {{$item->dokumen}}
+                                </a>
+                            </td>
+                            @endif
 
                         </tr>
                         @endforeach
@@ -93,42 +100,43 @@
 
 <script>
     var minDate, maxDate;
- 
- // Custom filtering function which will search data in column four between two values
- $.fn.dataTable.ext.search.push(
-     function( settings, data, dataIndex ) {
-         var min = minDate.val();
-         var max = maxDate.val();
-         var date = new Date( data[4] );
-  
-         if (
-             ( min === null && max === null ) ||
-             ( min === null && date <= max ) ||
-             ( min <= date   && max === null ) ||
-             ( min <= date   && date <= max )
-         ) {
-             return true;
-         }
-         return false;
-     }
- );
-  
- $(document).ready(function() {
-     // Create date inputs
-     minDate = new DateTime($('#min'), {
-         format: 'YYYY-MM-DD'
-     });
-     maxDate = new DateTime($('#max'), {
-         format: 'YYYY-MM-DD'
-     });
-  
-     // DataTables initialisation
-     var table = $('#example').DataTable();
-  
-     // Refilter the table
-     $('#min, #max').on('change', function () {
-         table.draw();
-     });
- });
+
+    // Custom filtering function which will search data in column four between two values
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var date = new Date(data[4]);
+
+            if (
+                (min === null && max === null) ||
+                (min === null && date <= max) ||
+                (min <= date && max === null) ||
+                (min <= date && date <= max)
+            ) {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    $(document).ready(function () {
+        // Create date inputs
+        minDate = new DateTime($('#min'), {
+            format: 'YYYY-MM-DD'
+        });
+        maxDate = new DateTime($('#max'), {
+            format: 'YYYY-MM-DD'
+        });
+
+        // DataTables initialisation
+        var table = $('#example').DataTable();
+
+        // Refilter the table
+        $('#min, #max').on('change', function () {
+            table.draw();
+        });
+    });
+
 </script>
 @endpush

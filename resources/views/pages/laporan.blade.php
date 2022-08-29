@@ -1,10 +1,11 @@
 @extends('layouts.master')
 @push('style')
-{{-- <link rel="stylesheet" href="{{asset('assets/css/pages/datatables.css')}}"> --}}
+<link rel="stylesheet" href="{{asset('assets/css/pages/datatables.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/pages/fontawesome.css')}}">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css">
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css"> --}}
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> --}}
 @endpush
 @section('content')
 <div class="page-heading">
@@ -32,26 +33,31 @@
             </div>
             <div class="card-body">
                 <table cellspacing="5" cellpadding="5" border="0">
-                    <form action="{{route('filterlaporan')}}" method="POST">
-                        @csrf
+                    @if (Auth::user()->level == 'pimpinan')
+                    <form action="{{route('laporan')}}" method="GET">
+                    @endif
+                    @if (Auth::user()->level == 'kepalabiro')
+                    <form action="{{route('laporankepalabiro')}}" method="GET">
+                    @endif
+                        {{-- @csrf --}}
                         <div class="row g-3 ">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="dari" id="surat" required>
+                                    <input type="date" class="form-control" name="start_date" id="surat" required>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="sampai" id="surat" required></div>
+                                    <input type="date" class="form-control" name="end_date" id="surat" required></div>
                             </div>
-                            <div class="col-md-2">
+                            {{-- <div class="col-md-2">
                                 <div class="form-group">
                                     <select class="form-control" id="jenis-kelamin" name="status">
                                         <option value="masuk">Masuk</option>
                                         <option value="keluar">Keluar</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <button type="submit" class="btn bg-primary text-white">Filter</button>
@@ -70,7 +76,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($laporan as $item)
+                        @foreach ($data as $item)
                         <tr>
                             <td>{{$item->no_surat}}</td>
                             <td>{{$item->pembuat->nama}}</td>
@@ -99,11 +105,12 @@
 </div>
 @endsection
 @push('script')
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-<script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script> --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
 {{-- <script>
     $(document).ready(function () {
@@ -117,7 +124,7 @@
     });
 
 </script> --}}
-
+{{-- 
 <script>
     var minDate, maxDate;
 
@@ -158,6 +165,6 @@
         });
     });
 
-</script>
+</script> --}}
 
 @endpush
