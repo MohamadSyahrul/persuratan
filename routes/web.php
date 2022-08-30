@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
         // $level = User::where('level', 'kepalabiro')->first();
         // dd($level);
         $notif = Disposisi::count();
-        $disposisi = Disposisi::select('kode_disposisi', 'catatan')->get();
+        $disposisi = Disposisi::select('kode_disposisi', 'catatan')->limit(3)->orderBy("created_at", "desc")->get();
         // dd($disposisi);
         return view('index', [
             'setuju' => $setuju,

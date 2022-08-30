@@ -12,8 +12,8 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             @foreach ($disposisi as $item)
                 <div class="dropdown-divider"></div>
-                <span class="dropdown-item">{{$item->kode_disposisi}}</span>
-                <span class="dropdown-item">{{$item->catatan}}</span>
+                <span class="dropdown-item">kode disposisi: {{$item->kode_disposisi}}</span>
+                <span class="dropdown-item">catatan: {{$item->catatan}}</span>
                 <div class="dropdown-divider"></div>
 
             @endforeach
